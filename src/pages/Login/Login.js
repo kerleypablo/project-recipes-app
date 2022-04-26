@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Login.css';
 
 function Login() {
   const [formState, setFormState] = useState({
@@ -27,6 +28,7 @@ function Login() {
         <label htmlFor="password-input">
           <input
             id="password-input"
+            type="password"
             name="password"
             data-testid="password-input"
             value={ password }
