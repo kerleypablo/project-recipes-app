@@ -29,6 +29,11 @@ function Login() {
     verifyButton();
   }, [email, password]);
 
+  const redirect = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+  };
+
   return (
     <div>
       <form>
@@ -58,6 +63,9 @@ function Login() {
           type="button"
           data-testid="login-submit-btn"
           disabled={ bttnIsDisabled }
+          onClick={ () => {
+            redirect();
+          } }
         >
           Enter
         </button>
