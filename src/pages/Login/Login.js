@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as EmailValidator from 'email-validator';
+import Footer from '../../components/Footer';
 
 const SIX = 6;
 
@@ -62,6 +63,7 @@ function Login() {
           Enter
         </button>
       </form>
+      <Footer />
     </div>
   );
 }
