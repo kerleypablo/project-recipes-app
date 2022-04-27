@@ -1,9 +1,13 @@
 import React from 'react';
 import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header2';
 
 function Explore() {
   return (
-    <Footer />
+    <div>
+      <Header PageTitle="Explorer" />
+      <Footer />
+    </div>
   );
 }
 
