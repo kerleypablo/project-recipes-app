@@ -15,6 +15,7 @@ function Header() {
       { Search.search
         ? (
           <div>
+            {/* Arrumar class search  */}
             <input className="seacrhInput" type="text" data-testid="search-input" />
             <button
               className="searchButton"
