@@ -1,9 +1,13 @@
 import React from 'react';
-import Footer from '../../components/Footer';
+import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
 
 function Foods() {
   return (
-    <Footer />
+    <div>
+      <Header />
+      <Footer />
+    </div>
   );
 }
 
