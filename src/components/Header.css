@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+}
+
+header {
+  background-color: rgb(150, 145, 145);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 1px 15px 20px rgba(165, 167, 165, 0.547);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px 30px;
+}
+
+.searchButton {
+  background-color: rgba(248, 247, 247, 0);
+  border: none;
+  height: 30px;
+  width: 30px;
+}
+
+.seacrhInput {
+  border-radius: 10px;
+}

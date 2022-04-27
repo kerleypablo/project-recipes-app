@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as EmailValidator from 'email-validator';
+import './Login.css';
 
 const SIX = 6;
 
@@ -28,6 +29,13 @@ function Login() {
     };
     verifyButton();
   }, [email, password]);
+
+  const redirect = () => {
+    localStorage.setItem('mealsToken', 1);
+    localStorage.setItem('cocktailsToken', 1);
+    localStorage.setItem('user', JSON.stringify({ email }));
+    window.location.href = '/foods';
+  };
 
   return (
     <div>
@@ -58,6 +66,9 @@ function Login() {
           type="button"
           data-testid="login-submit-btn"
           disabled={ bttnIsDisabled }
+          onClick={ () => {
+            redirect();
+          } }
         >
           Enter
         </button>
