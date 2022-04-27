@@ -1,8 +1,11 @@
 import React from 'react';
+import Header from '../../components/Header/Header2';
 
 function RecipesMade() {
   return (
-    <div />
+    <div>
+      <Header PageTitle="Done Recipes" />
+    </div>
   );
 }
 
