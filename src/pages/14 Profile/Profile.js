@@ -1,10 +1,10 @@
 import React from 'react';
 import Footer from '../../components/Footer';
 
-function Perfil() {
+function Profile() {
   return (
     <Footer />
   );
 }
 
-export default Perfil;
+export default Profile;
