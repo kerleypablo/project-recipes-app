@@ -3,23 +3,30 @@
 }
 
 header {
+  align-items: baseline;
   background-color: rgb(150, 145, 145);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
-  box-shadow: 1px 15px 20px rgba(165, 167, 165, 0.547);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  margin-bottom: 10px;
+  left: 0;
   padding: 10px 30px;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .searchButton {
   background-color: rgba(248, 247, 247, 0);
   border: none;
-  height: 30px;
-  width: 30px;
+  height: 5px;
 }
 
-.seacrhInput {
+.searchInput {
   border-radius: 10px;
+}
+
+.title {
+  padding-right: 30%;
 }
