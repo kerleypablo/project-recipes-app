@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchDrinkDetails from '../../services/fetchDrinkDetails';
 import fetchRecommendedMeals from '../../services/fetchRecommendedMeals';
-import generateRandomNumber from '../../helpers/generateRandomNumber';
 
 function DrinksDetails({ match: { params: { id } } }) {
   const [drink, setDrink] = useState('');
@@ -14,7 +13,6 @@ function DrinksDetails({ match: { params: { id } } }) {
     const getDrinkDetails = async () => {
       const drinks = await fetchDrinkDetails(id);
       setDrink(drinks[0]);
-      console.log(drinks[0]);
     };
     getDrinkDetails();
   }, [id]);
@@ -23,10 +21,7 @@ function DrinksDetails({ match: { params: { id } } }) {
     const SIX = 6;
     const getRecommendedMeals = async () => {
       const meals = await fetchRecommendedMeals();
-      const mealsList = [];
-      for (let i = 1; i < SIX; i += 1) {
-        mealsList.push(meals[generateRandomNumber()]);
-      }
+      const mealsList = [...meals].splice(0, SIX);
       setRecommendedCards(mealsList);
     };
     getRecommendedMeals();
@@ -68,7 +63,6 @@ function DrinksDetails({ match: { params: { id } } }) {
 
   return (
     <div>
-      { console.log(recommendedCards) }
       { drink !== '' ? (
         <div>
           <img
@@ -113,13 +107,16 @@ function DrinksDetails({ match: { params: { id } } }) {
           <div>
             <h2>Recommended</h2>
             { recommendedCards.map((item, index) => (
-              <img
-                width="100px"
-                key={ index }
-                src={ item.strMealThumb }
-                data-testid={ `${index}-recomendation-card` }
-                alt={ item.strMeal }
-              />
+              <div key={ index }>
+                <img
+                  width="100px"
+                  key={ index }
+                  src={ item.strMealThumb }
+                  data-testid={ `${index}-recomendation-card` }
+                  alt={ item.strMeal }
+                />
+                <h3 data-testid={ `${index}-recomendation-title` }>{item.strMeal}</h3>
+              </div>
             ))}
           </div>
           <div>
