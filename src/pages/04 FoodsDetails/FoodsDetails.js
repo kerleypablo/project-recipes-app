@@ -24,6 +24,19 @@ function FoodsDetails({ match: { params: { id } } }) {
   }, [id]);
 
   useEffect(() => {
+    const getMeasures = (meals) => {
+      const arrFilter = Object.keys(meals).filter((item) => item.includes('strMeasure'));
+      let measures = [];
+      Object.entries(meals).forEach((item) => {
+        const findMeasure = arrFilter
+          .find((e) => e === item[0] && item[1] !== '' && item[1] !== null);
+        if (findMeasure) {
+          measures = [...measures, item];
+        }
+      });
+      return measures;
+    };
+
     const getIngredients = (meals) => {
       const arrFilter = (Object.keys(meals)
         .filter((item) => item.includes('strIngredient')));
@@ -34,6 +47,10 @@ function FoodsDetails({ match: { params: { id } } }) {
         if (findIngredient) {
           ingredients = [...ingredients, item];
         }
+      });
+      const measures = getMeasures(food);
+      ingredients.forEach((item, index) => {
+        ingredients[index] = [...item, measures[index][1]];
       });
       setIngredientsList(ingredients);
     };
@@ -69,12 +86,13 @@ function FoodsDetails({ match: { params: { id } } }) {
           <div>
             <h2>Ingredients</h2>
             <ul>
-              { ingredientsList.map((item, index) => (
+              { ingredientsList.length > 0
+              && ingredientsList.map((item, index) => (
                 <li
                   data-testid={ `${index}-ingredient-name-and-measure` }
                   key={ item[0] }
                 >
-                  { item[1] }
+                  { `${item[1]} - ${item[2]} ` }
                 </li>
               ))}
             </ul>

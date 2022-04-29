@@ -21,6 +21,19 @@ function DrinksDetails({ match: { params: { id } } }) {
   }, [id]);
 
   useEffect(() => {
+    const getMeasures = (drinks) => {
+      const arrFilter = Object.keys(drinks).filter((item) => item.includes('strMeasure'));
+      let measures = [];
+      Object.entries(drinks).forEach((item) => {
+        const findMeasure = arrFilter
+          .find((e) => e === item[0] && item[1] !== '' && item[1] !== null);
+        if (findMeasure) {
+          measures = [...measures, item];
+        }
+      });
+      return measures;
+    };
+
     const getIngredients = (drinks) => {
       const arrFilter = (Object.keys(drinks)
         .filter((item) => item.includes('strIngredient')));
@@ -31,6 +44,10 @@ function DrinksDetails({ match: { params: { id } } }) {
         if (findIngredient) {
           ingredients = [...ingredients, item];
         }
+      });
+      const measures = getMeasures(drinks);
+      ingredients.forEach((item, index) => {
+        ingredients[index] = [...item, measures[index][1]];
       });
       setIngredientsList(ingredients);
     };
@@ -48,7 +65,7 @@ function DrinksDetails({ match: { params: { id } } }) {
             data-testid="recipe-photo"
           />
           <h1 data-testid="recipe-title">{drink.strDrink}</h1>
-          <p data-testid="recipe-category">{drink.strCategory}</p>
+          <p data-testid="recipe-category">{drink.strAlcoholic}</p>
           <div>
             <button
               data-testid="share-btn"
@@ -66,12 +83,13 @@ function DrinksDetails({ match: { params: { id } } }) {
           <div>
             <h2>Ingredients</h2>
             <ul>
-              { ingredientsList.map((item, index) => (
+              { ingredientsList.length > 0
+              && ingredientsList.map((item, index) => (
                 <li
                   data-testid={ `${index}-ingredient-name-and-measure` }
                   key={ item[0] }
                 >
-                  { item[1] }
+                  { `${item[1]} - ${item[2]} ` }
                 </li>
               ))}
             </ul>
