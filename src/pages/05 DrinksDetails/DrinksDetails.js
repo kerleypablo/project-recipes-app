@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchDrinkDetails from '../../services/fetchDrinkDetails';
+import fetchRecommendedMeals from '../../services/fetchRecommendedMeals';
+import generateRandomNumber from '../../helpers/generateRandomNumber';
 
 function DrinksDetails({ match: { params: { id } } }) {
   const [drink, setDrink] = useState('');
@@ -13,12 +15,22 @@ function DrinksDetails({ match: { params: { id } } }) {
       const drinks = await fetchDrinkDetails(id);
       setDrink(drinks[0]);
       console.log(drinks[0]);
-      setRecommendedCards([
-        { name: drinks[0].strDrink, thumb: drinks[0].strDrinkThumb },
-        { name: drinks[0].strDrink, thumb: drinks[0].strDrinkThumb }]);
     };
     getDrinkDetails();
   }, [id]);
+
+  useEffect(() => {
+    const SIX = 6;
+    const getRecommendedMeals = async () => {
+      const meals = await fetchRecommendedMeals();
+      const mealsList = [];
+      for (let i = 1; i < SIX; i += 1) {
+        mealsList.push(meals[generateRandomNumber()]);
+      }
+      setRecommendedCards(mealsList);
+    };
+    getRecommendedMeals();
+  }, []);
 
   useEffect(() => {
     const getMeasures = (drinks) => {
@@ -56,6 +68,7 @@ function DrinksDetails({ match: { params: { id } } }) {
 
   return (
     <div>
+      { console.log(recommendedCards) }
       { drink !== '' ? (
         <div>
           <img
@@ -103,9 +116,9 @@ function DrinksDetails({ match: { params: { id } } }) {
               <img
                 width="100px"
                 key={ index }
-                src={ item.thumb }
+                src={ item.strMealThumb }
                 data-testid={ `${index}-recomendation-card` }
-                alt={ item.name }
+                alt={ item.strMeal }
               />
             ))}
           </div>
