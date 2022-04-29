@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchFoodDetails from '../../services/fetchFoodDetails';
+import fetchRecommendedDrinks from '../../services/fetchRecommendedDrinks';
+import generateRandomNumber from '../../helpers/generateRandomNumber';
 
 function FoodsDetails({ match: { params: { id } } }) {
   const [food, setFood] = useState({
@@ -15,13 +17,22 @@ function FoodsDetails({ match: { params: { id } } }) {
       const meals = await fetchFoodDetails(id);
       meals[0].strYoutube = meals[0].strYoutube.replace('watch?v=', 'embed/');
       setFood(meals[0]);
-      setRecommendedCards([
-        { name: meals[0].strMeal, thumb: meals[0].strMealThumb },
-        { name: meals[0].strMeal, thumb: meals[0].strMealThumb }]);
-      console.log(meals[0]);
     };
     getFoodDetails();
   }, [id]);
+
+  useEffect(() => {
+    const SIX = 6;
+    const getRecommendedDrinks = async () => {
+      const drinks = await fetchRecommendedDrinks();
+      const drinksList = [];
+      for (let i = 1; i < SIX; i += 1) {
+        drinksList.push(drinks[generateRandomNumber()]);
+      }
+      setRecommendedCards(drinksList);
+    };
+    getRecommendedDrinks();
+  }, []);
 
   useEffect(() => {
     const getMeasures = (meals) => {
@@ -117,9 +128,9 @@ function FoodsDetails({ match: { params: { id } } }) {
               <img
                 width="100px"
                 key={ index }
-                src={ item.thumb }
+                src={ item.strDrinkThumb }
                 data-testid={ `${index}-recomendation-card` }
-                alt={ item.name }
+                alt={ item.strDrink }
               />
             ))}
           </div>
