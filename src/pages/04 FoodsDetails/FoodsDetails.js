@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchFoodDetails from '../../services/fetchFoodDetails';
 import fetchRecommendedDrinks from '../../services/fetchRecommendedDrinks';
+import './FoodsDetails.css';
 
 function FoodsDetails({ match: { params: { id } } }) {
   const [food, setFood] = useState({
@@ -120,18 +121,20 @@ function FoodsDetails({ match: { params: { id } } }) {
           </div>
           <div>
             <h2>Recommended</h2>
-            { recommendedCards.map((item, index) => (
-              <div key={ index }>
-                <img
-                  width="100px"
-                  key={ index }
-                  src={ item.strDrinkThumb }
-                  data-testid={ `${index}-recomendation-card` }
-                  alt={ item.strDrink }
-                />
-                <h3 data-testid={ `${index}-recomendation-title` }>{item.strDrink}</h3>
-              </div>
-            ))}
+            <div className="recomendation-cards">
+              { recommendedCards.map((item, index) => (
+                <div key={ index }>
+                  <img
+                    width="100px"
+                    key={ index }
+                    src={ item.strDrinkThumb }
+                    data-testid={ `${index}-recomendation-card` }
+                    alt={ item.strDrink }
+                  />
+                  <h3 data-testid={ `${index}-recomendation-title` }>{item.strDrink}</h3>
+                </div>
+              ))}
+            </div>
           </div>
           <div>
             <button

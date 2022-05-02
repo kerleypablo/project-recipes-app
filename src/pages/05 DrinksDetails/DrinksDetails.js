@@ -106,18 +106,20 @@ function DrinksDetails({ match: { params: { id } } }) {
           </div>
           <div>
             <h2>Recommended</h2>
-            { recommendedCards.map((item, index) => (
-              <div key={ index }>
-                <img
-                  width="100px"
-                  key={ index }
-                  src={ item.strMealThumb }
-                  data-testid={ `${index}-recomendation-card` }
-                  alt={ item.strMeal }
-                />
-                <h3 data-testid={ `${index}-recomendation-title` }>{item.strMeal}</h3>
-              </div>
-            ))}
+            <div className="recomendation-cards">
+              { recommendedCards.map((item, index) => (
+                <div key={ index }>
+                  <img
+                    width="100px"
+                    key={ index }
+                    src={ item.strMealThumb }
+                    data-testid={ `${index}-recomendation-card` }
+                    alt={ item.strMeal }
+                  />
+                  <h3 data-testid={ `${index}-recomendation-title` }>{item.strMeal}</h3>
+                </div>
+              ))}
+            </div>
           </div>
           <div>
             <button
