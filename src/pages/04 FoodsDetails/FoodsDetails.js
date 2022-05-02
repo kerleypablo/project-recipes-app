@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchFoodDetails from '../../services/fetchFoodDetails';
 import fetchRecommendedDrinks from '../../services/fetchRecommendedDrinks';
-import generateRandomNumber from '../../helpers/generateRandomNumber';
+import './FoodsDetails.css';
 
 function FoodsDetails({ match: { params: { id } } }) {
   const [food, setFood] = useState({
@@ -25,10 +25,7 @@ function FoodsDetails({ match: { params: { id } } }) {
     const SIX = 6;
     const getRecommendedDrinks = async () => {
       const drinks = await fetchRecommendedDrinks();
-      const drinksList = [];
-      for (let i = 1; i < SIX; i += 1) {
-        drinksList.push(drinks[generateRandomNumber()]);
-      }
+      const drinksList = [...drinks].splice(0, SIX);
       setRecommendedCards(drinksList);
     };
     getRecommendedDrinks();
@@ -124,15 +121,20 @@ function FoodsDetails({ match: { params: { id } } }) {
           </div>
           <div>
             <h2>Recommended</h2>
-            { recommendedCards.map((item, index) => (
-              <img
-                width="100px"
-                key={ index }
-                src={ item.strDrinkThumb }
-                data-testid={ `${index}-recomendation-card` }
-                alt={ item.strDrink }
-              />
-            ))}
+            <div className="recomendation-cards">
+              { recommendedCards.map((item, index) => (
+                <div key={ index }>
+                  <img
+                    width="100px"
+                    key={ index }
+                    src={ item.strDrinkThumb }
+                    data-testid={ `${index}-recomendation-card` }
+                    alt={ item.strDrink }
+                  />
+                  <h3 data-testid={ `${index}-recomendation-title` }>{item.strDrink}</h3>
+                </div>
+              ))}
+            </div>
           </div>
           <div>
             <button
