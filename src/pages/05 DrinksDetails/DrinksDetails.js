@@ -121,10 +121,14 @@ function DrinksDetails({ match: { params: { id } } }) {
               ))}
             </div>
           </div>
-          <div>
+          <div className="container-btn-start-recipe">
             <button
               type="button"
+              className="start-recipe"
               data-testid="start-recipe-btn"
+              onClick={ () => {
+                window.location.href = `/drinks/${drink.idDrink}/in-progress`;
+              } }
             >
               Start Recipe
             </button>
