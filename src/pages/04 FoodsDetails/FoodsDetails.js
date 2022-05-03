@@ -1,9 +1,163 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import fetchFoodDetails from '../../services/fetchFoodDetails';
+import fetchRecommendedDrinks from '../../services/fetchRecommendedDrinks';
+import generateRandomNumber from '../../helpers/generateRandomNumber';
 
-function FoodsDetails() {
+function FoodsDetails({ match: { params: { id } } }) {
+  const [food, setFood] = useState({
+    strMealThumb: '',
+    strMeal: '',
+  });
+  const [ingredientsList, setIngredientsList] = useState([]);
+  const [recommendedCards, setRecommendedCards] = useState([]);
+
+  useEffect(() => {
+    const getFoodDetails = async () => {
+      const meals = await fetchFoodDetails(id);
+      meals[0].strYoutube = meals[0].strYoutube.replace('watch?v=', 'embed/');
+      setFood(meals[0]);
+    };
+    getFoodDetails();
+  }, [id]);
+
+  useEffect(() => {
+    const SIX = 6;
+    const getRecommendedDrinks = async () => {
+      const drinks = await fetchRecommendedDrinks();
+      const drinksList = [];
+      for (let i = 1; i < SIX; i += 1) {
+        drinksList.push(drinks[generateRandomNumber()]);
+      }
+      setRecommendedCards(drinksList);
+    };
+    getRecommendedDrinks();
+  }, []);
+
+  useEffect(() => {
+    const getMeasures = (meals) => {
+      const arrFilter = Object.keys(meals).filter((item) => item.includes('strMeasure'));
+      let measures = [];
+      Object.entries(meals).forEach((item) => {
+        const findMeasure = arrFilter
+          .find((e) => e === item[0] && item[1] !== '' && item[1] !== null);
+        if (findMeasure) {
+          measures = [...measures, item];
+        }
+      });
+      return measures;
+    };
+
+    const getIngredients = (meals) => {
+      const arrFilter = (Object.keys(meals)
+        .filter((item) => item.includes('strIngredient')));
+      let ingredients = [];
+      Object.entries(meals).forEach((item) => {
+        const findIngredient = arrFilter
+          .find((e) => e === item[0] && item[1] !== '' && item[1] !== null);
+        if (findIngredient) {
+          ingredients = [...ingredients, item];
+        }
+      });
+      const measures = getMeasures(food);
+      ingredients.forEach((item, index) => {
+        ingredients[index] = [...item, measures[index][1]];
+      });
+      setIngredientsList(ingredients);
+    };
+    getIngredients(food);
+  }, [food]);
+
   return (
-    <div />
+    <div>
+      { food !== '' ? (
+        <div>
+          <img
+            src={ food.strMealThumb }
+            alt={ food.strMeal }
+            width="400px"
+            data-testid="recipe-photo"
+          />
+          <h1 data-testid="recipe-title">{food.strMeal}</h1>
+          <p data-testid="recipe-category">{food.strCategory}</p>
+          <div>
+            <button
+              data-testid="share-btn"
+              type="button"
+            >
+              Share
+            </button>
+            <button
+              data-testid="favorite-btn"
+              type="button"
+            >
+              Favoritar
+            </button>
+          </div>
+          <div>
+            <h2>Ingredients</h2>
+            <ul>
+              { ingredientsList.length > 0
+              && ingredientsList.map((item, index) => (
+                <li
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                  key={ item[0] }
+                >
+                  { `${item[1]} - ${item[2]} ` }
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p data-testid="instructions">{food.strInstructions}</p>
+          </div>
+          <div>
+            <iframe
+              src={ food.strYoutube }
+              title={ food.strMeal }
+              data-testid="video"
+              frameBorder="0"
+              allowFullScreen
+            >
+              <p>Seu navegador não possui Suporte para este recurso...</p>
+            </iframe>
+          </div>
+          <div>
+            <h2>Recommended</h2>
+            { recommendedCards.map((item, index) => (
+              <img
+                width="100px"
+                key={ index }
+                src={ item.strDrinkThumb }
+                data-testid={ `${index}-recomendation-card` }
+                alt={ item.strDrink }
+              />
+            ))}
+          </div>
+          <div>
+            <button
+              type="button"
+              data-testid="start-recipe-btn"
+            >
+              Start Recipe
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <h1>Loading...</h1>
+        </div>
+      ) }
+    </div>
   );
 }
+
+FoodsDetails.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.string,
+    }),
+  }),
+}.isRequired;
 
 export default FoodsDetails;

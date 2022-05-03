@@ -6,6 +6,7 @@ const HeaderApiDrinks = async (RadioSelected, searchValue) => {
     URLDrink = `https://www.thecocktaildb.com/api/json/v1/1/search.php?${RadioSelected}=${searchValue}`;
   }
   const response = await fetch(URLDrink);
+  console.log(response);
   const result = await response.json();
   console.log(result);
   return result;

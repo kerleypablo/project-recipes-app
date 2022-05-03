@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import ProfileIcon from '../../images/profileIcon.svg';
 import SearchIcon from '../../images/searchIcon.svg';
 import './Header.css';
-import HeaderApiFood from '../../redux/Services/HeaderApiFood';
+import HeaderApiDrinks from '../../redux/Services/HeaderApiDrinks';
 import CardReceita from '../Receitas/CardReceita';
 
-function Header({ PageTitle }) {
+function HeaderDrinks({ PageTitle }) {
   const [Search, setSearch] = useState({
     search: false,
     RadioSelected: '',
@@ -23,9 +23,10 @@ function Header({ PageTitle }) {
     }
     const valueRadio = document.querySelector('input:checked').value;
     const ValueTextInput = document.querySelector('.searchInput').value;
-    const resultdata = await HeaderApiFood(valueRadio, ValueTextInput);
-    if (resultdata.meals !== null) {
-      const filter = await resultdata.meals.filter((ele, index) => index < NUM_RESULT);
+    const resultdata = await HeaderApiDrinks(valueRadio, ValueTextInput);
+    console.log(resultdata);
+    if (resultdata.drinks !== null) {
+      const filter = resultdata.drinks.filter((ele, index) => index < NUM_RESULT);
       setData(filter);
     } else {
       setData(null);
@@ -38,8 +39,29 @@ function Header({ PageTitle }) {
         searchValue: ValueTextInput,
       }
     ));
-    console.log(resultdata);
   };
+
+  function resulOfSearchDrinks() {
+    if (Data !== null && Data.length > 1) {
+      return (
+        <div className="boxRecipe">
+          {Data
+            .map((receita, index) => (
+              <CardReceita
+                key={ receita.idDrink }
+                id={ receita.idDrink }
+                index={ index }
+                name={ receita.strDrink }
+                thumneal={ receita.strDrinkThumb }
+                pagina={ PageTitle }
+              />
+            ))}
+        </div>);
+    } if (Data !== null && Data.length === 1) {
+      const paginadirect = `/${PageTitle.toLowerCase()}/${Data[0].idDrink}`;
+      return <Redirect to={ paginadirect } />;
+    }
+  }
 
   const ChangeOption = ({ target }) => {
     setSearch((prevState) => (
@@ -49,28 +71,6 @@ function Header({ PageTitle }) {
       }
     ));
   };
-
-  function resulOfSearchFood() {
-    if (Data !== null && Data.length > 1) {
-      return (
-        <div className="boxRecipe">
-          {Data
-            .map((receita, index) => (
-              <CardReceita
-                key={ receita.idMeal }
-                id={ receita.idMeal }
-                index={ index }
-                name={ receita.strMeal }
-                thumneal={ receita.strMealThumb }
-                pagina={ PageTitle }
-              />
-            ))}
-        </div>);
-    } if (Data !== null && Data.length === 1) {
-      const paginadirect = `/${PageTitle.toLowerCase()}/${Data[0].idMeal}`;
-      return <Redirect to={ paginadirect } />;
-    }
-  }
 
   return (
     <header>
@@ -106,7 +106,6 @@ function Header({ PageTitle }) {
                 data-testid="search-input"
                 onChange={ ChangeOption }
                 name="inputSerach"
-                value={ Search.inputSerach }
               />
               <div className="form-check">
                 <label className="form-check-label" htmlFor="flexRadioDefault1">
@@ -156,7 +155,7 @@ function Header({ PageTitle }) {
             </form>
             <div>
               {
-                resulOfSearchFood()
+                resulOfSearchDrinks()
               }
             </div>
           </div>
@@ -168,8 +167,8 @@ function Header({ PageTitle }) {
   );
 }
 
-Header.propTypes = {
+HeaderDrinks.propTypes = {
   PageTitle: PropTypes.string,
 }.isRequired;
 
-export default Header;
+export default HeaderDrinks;
