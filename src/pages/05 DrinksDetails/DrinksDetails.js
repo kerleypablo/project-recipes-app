@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import fetchDrinkDetails from '../../services/fetchDrinkDetails';
 import fetchRecommendedMeals from '../../services/fetchRecommendedMeals';
 
-function DrinksDetails({ match: { params: { id } } }) {
+function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
   const [drink, setDrink] = useState('');
 
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recommendedCards, setRecommendedCards] = useState([]);
+  const [copy, setCopy] = useState(false);
 
   useEffect(() => {
     const getDrinkDetails = async () => {
@@ -61,6 +62,16 @@ function DrinksDetails({ match: { params: { id } } }) {
     getIngredients(drink);
   }, [drink]);
 
+  const copyToClipBoard = async (link) => {
+    const url = `http://localhost:3000${link}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopy(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       { drink !== '' ? (
@@ -73,10 +84,11 @@ function DrinksDetails({ match: { params: { id } } }) {
           />
           <h1 data-testid="recipe-title">{drink.strDrink}</h1>
           <p data-testid="recipe-category">{drink.strAlcoholic}</p>
-          <div>
+          <div className="container-share-and-favorite-btn">
             <button
               data-testid="share-btn"
               type="button"
+              onClick={ () => copyToClipBoard(pathname) }
             >
               Share
             </button>
@@ -87,6 +99,11 @@ function DrinksDetails({ match: { params: { id } } }) {
               Favoritar
             </button>
           </div>
+          {copy && (
+            <div>
+              <p>Link copied!</p>
+            </div>
+          )}
           <div>
             <h2>Ingredients</h2>
             <ul>
