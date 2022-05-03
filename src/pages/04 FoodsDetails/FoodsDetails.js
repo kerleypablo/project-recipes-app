@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchFoodDetails from '../../services/fetchFoodDetails';
 import fetchRecommendedDrinks from '../../services/fetchRecommendedDrinks';
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import './FoodsDetails.css';
 
 function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
@@ -45,7 +47,6 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
       });
       return measures;
     };
-
     const getIngredients = (meals) => {
       const arrFilter = (Object.keys(meals)
         .filter((item) => item.includes('strIngredient')));
@@ -68,12 +69,9 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
 
   const copyToClipBoard = async (link) => {
     const url = `http://localhost:3000${link}`;
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopy(true);
-    } catch (error) {
-      console.log(error);
-    }
+    navigator.clipboard.writeText(url).then(
+      () => setCopy(true),
+    ).catch((error) => console.log(error));
   };
 
   return (
@@ -94,13 +92,13 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
               type="button"
               onClick={ () => copyToClipBoard(pathname) }
             >
-              Share
+              <img src={ shareIcon } alt="share-icon" />
             </button>
             <button
               data-testid="favorite-btn"
               type="button"
             >
-              Favoritar
+              <img src={ whiteHeartIcon } alt="coração-branco" />
             </button>
           </div>
           {copy && (
