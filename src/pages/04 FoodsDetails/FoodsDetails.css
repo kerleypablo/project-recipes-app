@@ -11,6 +11,12 @@
   width: 30%;
 }
 
+.container-btn-start-recipe {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 .start-recipe {
   bottom: 0;
   position: fixed;
