@@ -4,13 +4,14 @@ import fetchFoodDetails from '../../services/fetchFoodDetails';
 import fetchRecommendedDrinks from '../../services/fetchRecommendedDrinks';
 import './FoodsDetails.css';
 
-function FoodsDetails({ match: { params: { id } } }) {
+function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   const [food, setFood] = useState({
     strMealThumb: '',
     strMeal: '',
   });
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recommendedCards, setRecommendedCards] = useState([]);
+  const [copy, setCopy] = useState(false);
 
   useEffect(() => {
     const getFoodDetails = async () => {
@@ -65,6 +66,16 @@ function FoodsDetails({ match: { params: { id } } }) {
     getIngredients(food);
   }, [food]);
 
+  const copyToClipBoard = async (link) => {
+    const url = `http://localhost:3000${link}`;
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopy(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       { food !== '' ? (
@@ -77,10 +88,11 @@ function FoodsDetails({ match: { params: { id } } }) {
           />
           <h1 data-testid="recipe-title">{food.strMeal}</h1>
           <p data-testid="recipe-category">{food.strCategory}</p>
-          <div>
+          <div className="container-share-and-favorite-btn">
             <button
               data-testid="share-btn"
               type="button"
+              onClick={ () => copyToClipBoard(pathname) }
             >
               Share
             </button>
@@ -91,6 +103,11 @@ function FoodsDetails({ match: { params: { id } } }) {
               Favoritar
             </button>
           </div>
+          {copy && (
+            <div>
+              <p>Link copied!</p>
+            </div>
+          )}
           <div>
             <h2>Ingredients</h2>
             <ul>

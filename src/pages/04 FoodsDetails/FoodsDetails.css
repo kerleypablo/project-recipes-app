@@ -11,6 +11,12 @@
   width: 30%;
 }
 
+.container-share-and-favorite-btn {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 .container-btn-start-recipe {
   align-items: center;
   display: flex;
