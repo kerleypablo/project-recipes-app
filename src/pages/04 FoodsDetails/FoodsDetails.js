@@ -139,6 +139,7 @@ function FoodsDetails({ match: { params: { id } } }) {
           <div>
             <button
               type="button"
+              className="start-recipe"
               data-testid="start-recipe-btn"
             >
               Start Recipe

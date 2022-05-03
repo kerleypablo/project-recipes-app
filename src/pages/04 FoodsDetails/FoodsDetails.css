@@ -10,3 +10,8 @@
   overflow: scroll;
   width: 30%;
 }
+
+.start-recipe {
+  bottom: 0;
+  position: fixed;
+}
