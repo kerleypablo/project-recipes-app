@@ -15,3 +15,7 @@
   background-color: rgb(175, 171, 171);
   border: 2px solid rgb(103, 100, 100);
 }
+
+.recipeSection {
+  margin: auto;
+}
