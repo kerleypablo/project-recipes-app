@@ -74,6 +74,31 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
     ).catch((error) => console.log(error));
   };
 
+  const favoriteRecipeFunc = () => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipes) {
+      const newArrFavorite = JSON.stringify([...favoriteRecipes, {
+        id: food.idMeal,
+        type: 'food',
+        nationality: food.strArea,
+        category: food.strCategory,
+        alcoholicOrNot: '',
+        name: food.strMeal,
+        image: food.strMealThumb,
+      }]);
+      localStorage.setItem('favoriteRecipes', newArrFavorite);
+    }
+    localStorage.setItem('favoriteRecipes', JSON.stringify([{
+      id: food.idMeal,
+      type: 'food',
+      nationality: food.strArea,
+      category: food.strCategory,
+      alcoholicOrNot: '',
+      name: food.strMeal,
+      image: food.strMealThumb,
+    }]));
+  };
+
   return (
     <div>
       { food !== '' ? (
@@ -97,6 +122,7 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
             <button
               data-testid="favorite-btn"
               type="button"
+              onClick={ () => favoriteRecipeFunc() }
             >
               <img src={ whiteHeartIcon } alt="coração-branco" />
             </button>

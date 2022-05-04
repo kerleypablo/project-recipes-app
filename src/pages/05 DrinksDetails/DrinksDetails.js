@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchDrinkDetails from '../../services/fetchDrinkDetails';
 import fetchRecommendedMeals from '../../services/fetchRecommendedMeals';
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
 function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
   const [drink, setDrink] = useState('');
@@ -64,12 +66,34 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
 
   const copyToClipBoard = async (link) => {
     const url = `http://localhost:3000${link}`;
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopy(true);
-    } catch (error) {
-      console.log(error);
+    navigator.clipboard.writeText(url).then(
+      () => setCopy(true),
+    ).catch((error) => console.log(error));
+  };
+
+  const favoriteRecipeFunc = () => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipes) {
+      const newArrFavorite = JSON.stringify([...favoriteRecipes, {
+        id: drink.idDrink,
+        type: 'drink',
+        nationality: '',
+        category: drink.strCategory,
+        alcoholicOrNot: drink.strAlcoholic,
+        name: drink.strDrink,
+        image: drink.strDrinkThumb,
+      }]);
+      localStorage.setItem('favoriteRecipes', newArrFavorite);
     }
+    localStorage.setItem('favoriteRecipes', JSON.stringify([{
+      id: drink.idDrink,
+      type: 'drink',
+      nationality: '',
+      category: drink.strCategory,
+      alcoholicOrNot: drink.strAlcoholic,
+      name: drink.strDrink,
+      image: drink.strDrinkThumb,
+    }]));
   };
 
   return (
@@ -90,13 +114,14 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
               type="button"
               onClick={ () => copyToClipBoard(pathname) }
             >
-              Share
+              <img src={ shareIcon } alt="share-icon" />
             </button>
             <button
               data-testid="favorite-btn"
               type="button"
+              onClick={ () => favoriteRecipeFunc() }
             >
-              Favoritar
+              <img src={ whiteHeartIcon } alt="coração-branco" />
             </button>
           </div>
           {copy && (
