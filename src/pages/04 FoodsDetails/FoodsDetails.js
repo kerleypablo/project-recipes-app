@@ -47,6 +47,7 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
       });
       return measures;
     };
+
     const getIngredients = (meals) => {
       const arrFilter = (Object.keys(meals)
         .filter((item) => item.includes('strIngredient')));

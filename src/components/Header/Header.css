@@ -1,4 +1,5 @@
 * {
+  box-sizing: border-box;
   margin: 0;
 }
 
@@ -7,26 +8,74 @@ header {
   background-color: rgb(150, 145, 145);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  box-shadow: 2px 4px 3px rgb(203, 201, 201);
   display: flex;
   flex-wrap: wrap;
+  height: 60px;
   justify-content: space-between;
   left: 0;
-  padding: 10px 30px;
+  padding: 10px 1px;
   position: fixed;
   top: 0;
+  width: 100%;
+}
+
+form {
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 20px;
+  padding-top: 10px;
   width: 100%;
 }
 
 .searchButton {
   background-color: rgba(248, 247, 247, 0);
   border: none;
-  height: 5px;
+  height: 1px;
+  margin: 0;
 }
 
 .searchInput {
   border-radius: 10px;
+  height: 35px;
+  width: 320px;
+}
+
+.form-check-input {
+  height: 20px;
+  margin-top: 1px;
+  width: 20px;
+}
+
+.title1 {
+  text-align: center;
+  width: 60%;
 }
 
 .title {
-  padding-right: 30%;
+  width: 60%;
+}
+
+.boxSearch {
+  background-color: white;
+  width: 100%;
+}
+
+.form-check label {
+  padding: 10px 18px;
+}
+
+.btn-primary {
+  height: 35px;
+  margin-top: 1px;
+}
+
+.boxRecipe {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px;
+  overflow-y: scroll;
 }

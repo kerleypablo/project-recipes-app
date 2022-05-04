@@ -1,4 +1,26 @@
 footer {
+  background-color: rgb(150, 145, 145);
   bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  height: 60px;
+  justify-content: space-between;
+  left: 0;
   position: fixed;
+  width: 100%;
 }
+
+.link {
+  height: 80px;
+  margin: auto;
+  margin-left: 1px;
+  padding-top: 10px;
+  width: 30%;
+}
+
+.link img {
+  margin-right: 20px;
+  padding-left: 40%;
+  padding-right: 20px;
+}
+

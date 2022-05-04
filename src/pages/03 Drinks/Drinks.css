@@ -1,3 +1,17 @@
 * {
   margin: 0;
 }
+
+.selectedDrink {
+  background-color: rgb(175, 171, 171);
+  border: 2px solid rgb(103, 100, 100);
+}
+
+.selectedexplorer {
+  background-color: rgba(175, 171, 171, 0);
+}
+
+.selectedMeal {
+  background-color: rgba(145, 143, 143, 0);
+
+}
