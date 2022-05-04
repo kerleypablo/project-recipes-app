@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchFoodDetails from '../../services/fetchFoodDetails';
 import fetchRecommendedDrinks from '../../services/fetchRecommendedDrinks';
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import './FoodsDetails.css';
+import ButtonShareAndFavorite from
+'../../components/ButtonShareAndFavorite/ButtonShareAndFavorite';
 
 function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   const [food, setFood] = useState({
@@ -13,7 +13,6 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   });
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recommendedCards, setRecommendedCards] = useState([]);
-  const [copy, setCopy] = useState(false);
 
   useEffect(() => {
     const getFoodDetails = async () => {
@@ -67,13 +66,6 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
     getIngredients(food);
   }, [food]);
 
-  const copyToClipBoard = async (link) => {
-    const url = `http://localhost:3000${link}`;
-    navigator.clipboard.writeText(url).then(
-      () => setCopy(true),
-    ).catch((error) => console.log(error));
-  };
-
   return (
     <div>
       { food !== '' ? (
@@ -87,25 +79,8 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
           <h1 data-testid="recipe-title">{food.strMeal}</h1>
           <p data-testid="recipe-category">{food.strCategory}</p>
           <div className="container-share-and-favorite-btn">
-            <button
-              data-testid="share-btn"
-              type="button"
-              onClick={ () => copyToClipBoard(pathname) }
-            >
-              <img src={ shareIcon } alt="share-icon" />
-            </button>
-            <button
-              data-testid="favorite-btn"
-              type="button"
-            >
-              <img src={ whiteHeartIcon } alt="coração-branco" />
-            </button>
+            <ButtonShareAndFavorite pathname={ pathname } />
           </div>
-          {copy && (
-            <div>
-              <p>Link copied!</p>
-            </div>
-          )}
           <div>
             <h2>Ingredients</h2>
             <ul>
