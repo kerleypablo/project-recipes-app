@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchFoodDetails from '../../services/fetchFoodDetails';
 import fetchRecommendedDrinks from '../../services/fetchRecommendedDrinks';
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import './FoodsDetails.css';
+import ButtonShareAndFavorite from
+'../../components/ButtonShareAndFavorite/ButtonShareAndFavorite';
 
 function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   const [food, setFood] = useState({
@@ -13,7 +13,6 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   });
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recommendedCards, setRecommendedCards] = useState([]);
-  const [copy, setCopy] = useState(false);
 
   useEffect(() => {
     const getFoodDetails = async () => {
@@ -68,38 +67,6 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
     getIngredients(food);
   }, [food]);
 
-  const copyToClipBoard = async (link) => {
-    const url = `http://localhost:3000${link}`;
-    navigator.clipboard.writeText(url).then(
-      () => setCopy(true),
-    ).catch((error) => console.log(error));
-  };
-
-  const favoriteRecipeFunc = () => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favoriteRecipes) {
-      const newArrFavorite = JSON.stringify([...favoriteRecipes, {
-        id: food.idMeal,
-        type: 'food',
-        nationality: food.strArea,
-        category: food.strCategory,
-        alcoholicOrNot: '',
-        name: food.strMeal,
-        image: food.strMealThumb,
-      }]);
-      localStorage.setItem('favoriteRecipes', newArrFavorite);
-    }
-    localStorage.setItem('favoriteRecipes', JSON.stringify([{
-      id: food.idMeal,
-      type: 'food',
-      nationality: food.strArea,
-      category: food.strCategory,
-      alcoholicOrNot: '',
-      name: food.strMeal,
-      image: food.strMealThumb,
-    }]));
-  };
-
   return (
     <div>
       { food !== '' ? (
@@ -112,27 +79,9 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
           />
           <h1 data-testid="recipe-title">{food.strMeal}</h1>
           <p data-testid="recipe-category">{food.strCategory}</p>
-          <div className="container-share-and-favorite-btn">
-            <button
-              data-testid="share-btn"
-              type="button"
-              onClick={ () => copyToClipBoard(pathname) }
-            >
-              <img src={ shareIcon } alt="share-icon" />
-            </button>
-            <button
-              data-testid="favorite-btn"
-              type="button"
-              onClick={ () => favoriteRecipeFunc() }
-            >
-              <img src={ whiteHeartIcon } alt="coração-branco" />
-            </button>
+          <div>
+            <ButtonShareAndFavorite pathname={ pathname } food={ food } />
           </div>
-          {copy && (
-            <div>
-              <p>Link copied!</p>
-            </div>
-          )}
           <div>
             <h2>Ingredients</h2>
             <ul>
@@ -205,6 +154,9 @@ FoodsDetails.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
+  }),
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }),
 }.isRequired;
 

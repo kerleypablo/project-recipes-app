@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchDrinkDetails from '../../services/fetchDrinkDetails';
 import fetchRecommendedMeals from '../../services/fetchRecommendedMeals';
-import shareIcon from '../../images/shareIcon.svg';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import ButtonShareAndFavorite from
+'../../components/ButtonShareAndFavorite/ButtonShareAndFavorite';
 
 function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
   const [drink, setDrink] = useState('');
 
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recommendedCards, setRecommendedCards] = useState([]);
-  const [copy, setCopy] = useState(false);
 
   useEffect(() => {
     const getDrinkDetails = async () => {
@@ -64,38 +63,6 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
     getIngredients(drink);
   }, [drink]);
 
-  const copyToClipBoard = async (link) => {
-    const url = `http://localhost:3000${link}`;
-    navigator.clipboard.writeText(url).then(
-      () => setCopy(true),
-    ).catch((error) => console.log(error));
-  };
-
-  const favoriteRecipeFunc = () => {
-    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (favoriteRecipes) {
-      const newArrFavorite = JSON.stringify([...favoriteRecipes, {
-        id: drink.idDrink,
-        type: 'drink',
-        nationality: '',
-        category: drink.strCategory,
-        alcoholicOrNot: drink.strAlcoholic,
-        name: drink.strDrink,
-        image: drink.strDrinkThumb,
-      }]);
-      localStorage.setItem('favoriteRecipes', newArrFavorite);
-    }
-    localStorage.setItem('favoriteRecipes', JSON.stringify([{
-      id: drink.idDrink,
-      type: 'drink',
-      nationality: '',
-      category: drink.strCategory,
-      alcoholicOrNot: drink.strAlcoholic,
-      name: drink.strDrink,
-      image: drink.strDrinkThumb,
-    }]));
-  };
-
   return (
     <div>
       { drink !== '' ? (
@@ -108,27 +75,9 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
           />
           <h1 data-testid="recipe-title">{drink.strDrink}</h1>
           <p data-testid="recipe-category">{drink.strAlcoholic}</p>
-          <div className="container-share-and-favorite-btn">
-            <button
-              data-testid="share-btn"
-              type="button"
-              onClick={ () => copyToClipBoard(pathname) }
-            >
-              <img src={ shareIcon } alt="share-icon" />
-            </button>
-            <button
-              data-testid="favorite-btn"
-              type="button"
-              onClick={ () => favoriteRecipeFunc() }
-            >
-              <img src={ whiteHeartIcon } alt="coração-branco" />
-            </button>
+          <div>
+            <ButtonShareAndFavorite pathname={ pathname } drink={ drink } />
           </div>
-          {copy && (
-            <div>
-              <p>Link copied!</p>
-            </div>
-          )}
           <div>
             <h2>Ingredients</h2>
             <ul>
