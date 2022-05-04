@@ -78,8 +78,8 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
           />
           <h1 data-testid="recipe-title">{food.strMeal}</h1>
           <p data-testid="recipe-category">{food.strCategory}</p>
-          <div className="container-share-and-favorite-btn">
-            <ButtonShareAndFavorite pathname={ pathname } />
+          <div>
+            <ButtonShareAndFavorite pathname={ pathname } food={ food } />
           </div>
           <div>
             <h2>Ingredients</h2>
@@ -153,6 +153,9 @@ FoodsDetails.propTypes = {
     params: PropTypes.shape({
       id: PropTypes.string,
     }),
+  }),
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
   }),
 }.isRequired;
 
