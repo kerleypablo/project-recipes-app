@@ -2,19 +2,20 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import fetchDrinkDetails from '../../services/fetchDrinkDetails';
 import fetchRecommendedMeals from '../../services/fetchRecommendedMeals';
-import generateRandomNumber from '../../helpers/generateRandomNumber';
+import shareIcon from '../../images/shareIcon.svg';
+import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 
-function DrinksDetails({ match: { params: { id } } }) {
+function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
   const [drink, setDrink] = useState('');
 
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recommendedCards, setRecommendedCards] = useState([]);
+  const [copy, setCopy] = useState(false);
 
   useEffect(() => {
     const getDrinkDetails = async () => {
       const drinks = await fetchDrinkDetails(id);
       setDrink(drinks[0]);
-      console.log(drinks[0]);
     };
     getDrinkDetails();
   }, [id]);
@@ -23,10 +24,7 @@ function DrinksDetails({ match: { params: { id } } }) {
     const SIX = 6;
     const getRecommendedMeals = async () => {
       const meals = await fetchRecommendedMeals();
-      const mealsList = [];
-      for (let i = 1; i < SIX; i += 1) {
-        mealsList.push(meals[generateRandomNumber()]);
-      }
+      const mealsList = [...meals].splice(0, SIX);
       setRecommendedCards(mealsList);
     };
     getRecommendedMeals();
@@ -66,9 +64,40 @@ function DrinksDetails({ match: { params: { id } } }) {
     getIngredients(drink);
   }, [drink]);
 
+  const copyToClipBoard = async (link) => {
+    const url = `http://localhost:3000${link}`;
+    navigator.clipboard.writeText(url).then(
+      () => setCopy(true),
+    ).catch((error) => console.log(error));
+  };
+
+  const favoriteRecipeFunc = () => {
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (favoriteRecipes) {
+      const newArrFavorite = JSON.stringify([...favoriteRecipes, {
+        id: drink.idDrink,
+        type: 'drink',
+        nationality: '',
+        category: drink.strCategory,
+        alcoholicOrNot: drink.strAlcoholic,
+        name: drink.strDrink,
+        image: drink.strDrinkThumb,
+      }]);
+      localStorage.setItem('favoriteRecipes', newArrFavorite);
+    }
+    localStorage.setItem('favoriteRecipes', JSON.stringify([{
+      id: drink.idDrink,
+      type: 'drink',
+      nationality: '',
+      category: drink.strCategory,
+      alcoholicOrNot: drink.strAlcoholic,
+      name: drink.strDrink,
+      image: drink.strDrinkThumb,
+    }]));
+  };
+
   return (
     <div>
-      { console.log(recommendedCards) }
       { drink !== '' ? (
         <div>
           <img
@@ -79,20 +108,27 @@ function DrinksDetails({ match: { params: { id } } }) {
           />
           <h1 data-testid="recipe-title">{drink.strDrink}</h1>
           <p data-testid="recipe-category">{drink.strAlcoholic}</p>
-          <div>
+          <div className="container-share-and-favorite-btn">
             <button
               data-testid="share-btn"
               type="button"
+              onClick={ () => copyToClipBoard(pathname) }
             >
-              Share
+              <img src={ shareIcon } alt="share-icon" />
             </button>
             <button
               data-testid="favorite-btn"
               type="button"
+              onClick={ () => favoriteRecipeFunc() }
             >
-              Favoritar
+              <img src={ whiteHeartIcon } alt="coração-branco" />
             </button>
           </div>
+          {copy && (
+            <div>
+              <p>Link copied!</p>
+            </div>
+          )}
           <div>
             <h2>Ingredients</h2>
             <ul>
@@ -112,20 +148,29 @@ function DrinksDetails({ match: { params: { id } } }) {
           </div>
           <div>
             <h2>Recommended</h2>
-            { recommendedCards.map((item, index) => (
-              <img
-                width="100px"
-                key={ index }
-                src={ item.strMealThumb }
-                data-testid={ `${index}-recomendation-card` }
-                alt={ item.strMeal }
-              />
-            ))}
+            <div className="recomendation-cards">
+              { recommendedCards.map((item, index) => (
+                <div key={ index }>
+                  <img
+                    width="100px"
+                    key={ index }
+                    src={ item.strMealThumb }
+                    data-testid={ `${index}-recomendation-card` }
+                    alt={ item.strMeal }
+                  />
+                  <h3 data-testid={ `${index}-recomendation-title` }>{item.strMeal}</h3>
+                </div>
+              ))}
+            </div>
           </div>
-          <div>
+          <div className="container-btn-start-recipe">
             <button
               type="button"
+              className="start-recipe"
               data-testid="start-recipe-btn"
+              onClick={ () => {
+                window.location.href = `/drinks/${drink.idDrink}/in-progress`;
+              } }
             >
               Start Recipe
             </button>
