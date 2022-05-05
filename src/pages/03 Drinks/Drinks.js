@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import HeaderDrinks from '../../components/Header/HeaderDrinks';
-import RecipesCard from '../../components/Recipes/RecipesCard';
+import RecipesCard from '../../components/RecipesScreen/RecipesCard';
+import ButtonDrinksCategory from '../../components/BtnCategories/BtnDrinksCategory';
 import { fetchDrinks } from '../../services/fetchRecipesScreen';
 import './Drinks.css';
 
@@ -19,6 +20,7 @@ function Drinks() {
   return (
     <div>
       <HeaderDrinks PageTitle="Drinks" />
+      <ButtonDrinksCategory />
       <section>
         {renderDrinks.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
           <RecipesCard

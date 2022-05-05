@@ -5,14 +5,16 @@ import { Link } from 'react-router-dom';
 
 function RecipeCard({ id, name, thumneal, pagina, index }) {
   return (
-    <Link to={ `/${pagina}/${id}` }>
-      <div className="boxCard" key={ id } data-testid={ `${index}-recipe-card` }>
-        <div>
-          <p data-testid={ `${index}-card-name` }>{ name }</p>
-          <img src={ thumneal } alt={ name } data-testid={ `${index}-card-img` } />
+    <div className="boxScreen">
+      <Link to={ `/${pagina}/${id}` }>
+        <div className="boxCard" key={ id } data-testid={ `${index}-recipe-card` }>
+          <div>
+            <p data-testid={ `${index}-card-name` }>{ name }</p>
+            <img src={ thumneal } alt={ name } data-testid={ `${index}-card-img` } />
+          </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 }
 

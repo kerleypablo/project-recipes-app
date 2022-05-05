@@ -34,7 +34,7 @@ const checkFirstTwelveRecipes = (recipes, meal = true) => {
   cy.get('[data-testid="12-card-name"]').should('not.exist');
 };
 
-describe('25 - Implemente os elementos da tela principal de receitas respeitando os atributos descritos no protótipo', () => {
+describe.only('25 - Implemente os elementos da tela principal de receitas respeitando os atributos descritos no protótipo', () => {
   it('A tela tem os data-testids de todos os 12 cards da tela de comidas', () => {
     cy.visit('http://localhost:3000/foods', {
       onBeforeLoad(win) {
@@ -73,7 +73,7 @@ describe('25 - Implemente os elementos da tela principal de receitas respeitando
   });
 });
 
-describe('26 - Carregue as 12 primeiras receitas de comidas ou bebidas, uma em cada card', () => {
+describe.only('26 - Carregue as 12 primeiras receitas de comidas ou bebidas, uma em cada card', () => {
   it('Caso as receitas sejam de comida, deve-se carregar as 12 primeiras receitas', () => {
     cy.visit('http://localhost:3000/foods', {
       onBeforeLoad(win) {
@@ -95,7 +95,7 @@ describe('26 - Carregue as 12 primeiras receitas de comidas ou bebidas, uma em c
   });
 });
 
-describe('27 - Implemente os botões de categoria para serem utilizados como filtro', () => {
+describe.only('27 - Implemente os botões de categoria para serem utilizados como filtro', () => {
   it('Caso as receitas sejam de comida, deve-se exibir as 5 primeiras categorias de comida', () => {
     cy.visit('http://localhost:3000/foods', {
       onBeforeLoad(win) {

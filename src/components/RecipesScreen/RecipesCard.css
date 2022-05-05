@@ -22,3 +22,7 @@
   font-weight: 800;
   text-align: center;
 }
+
+.boxScreen {
+  flex-direction: row;
+}
