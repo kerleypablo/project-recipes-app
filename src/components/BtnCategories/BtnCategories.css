@@ -3,5 +3,6 @@
 }
 
 .buttonCategory {
-  margin: auto;
+  display: row;
+  margin-left: 5px;
 }

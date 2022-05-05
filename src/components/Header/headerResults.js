@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import RecipesCard from '../Recipes/RecipesCard';
+import CardReceita from '../Receitas/CardReceita';
 
 export function resulOfSearchFood(data) {
   console.log(data);
@@ -8,7 +8,7 @@ export function resulOfSearchFood(data) {
     return (
       <div className="boxRecipe">
         {data.map((receita) => (
-          <RecipesCard
+          <CardReceita
             key={ receita.idMeal }
             id={ receita.idMeal }
             name={ receita.strMeal }
@@ -22,7 +22,7 @@ export function resulOfSearchFood(data) {
     return <Redirect to={ paginadirect } />;
   } if (data === null) {
     // eslint-disable-next-line no-alert
-    alert('Sorry, we havent found any recipes for these filters');
+    alert('Sorry, we haven\'t found any recipes for these filters.');
   }
 }
 
@@ -31,7 +31,7 @@ export function resulOfSearchDrinks(data) {
     return (
       <div className="boxRecipe">
         {data.map((receita) => (
-          <RecipesCard
+          <CardReceita
             key={ receita.idDrink }
             id={ receita.idDrink }
             name={ receita.strDrink }

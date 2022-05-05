@@ -19,3 +19,8 @@
 .recipeSection {
   margin: auto;
 }
+
+.foodsCategorySection {
+  display: flex;
+  width: 360px;
+}

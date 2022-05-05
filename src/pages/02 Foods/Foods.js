@@ -23,7 +23,7 @@ function Foods() {
   return (
     <div>
       <Header PageTitle="Foods" />
-      <section>
+      <section className="foodsCategorySection">
         <ButtonFoodsCategory />
         {renderFoods.map(({ idMeal, strMealThumb, strMeal }, index) => (
           <RecipesCard
