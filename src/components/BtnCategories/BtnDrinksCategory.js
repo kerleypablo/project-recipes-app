@@ -6,6 +6,7 @@ function ButtonDrinksCategory() {
   const {
     renderDrinkCategory,
     handleClickDCategories,
+    toggleValue,
   } = useContext(Context);
 
   return (
@@ -13,7 +14,8 @@ function ButtonDrinksCategory() {
       { renderDrinkCategory.map(({ strCategory }, index) => (
         <button
           data-testid={ `${strCategory}-category-filter` }
-          className="buttonCategory"
+          className={ `buttonCategory ${toggleValue === strCategory
+            ? 'buttonSelected' : ''}` }
           type="button"
           key={ index }
           onClick={ () => handleClickDCategories(strCategory) }
@@ -21,6 +23,15 @@ function ButtonDrinksCategory() {
           { strCategory }
         </button>
       ))}
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        className={ `buttonCategory ${toggleValue === ''
+          ? 'buttonSelected' : ''}` }
+        onClick={ () => handleClickDCategories('') }
+      >
+        All
+      </button>
     </section>
   );
 }

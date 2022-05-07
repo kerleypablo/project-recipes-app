@@ -6,14 +6,18 @@ function ButtonFoodsCategory() {
   const {
     renderBtnCategory,
     handleClickFCategories,
+    toggleValue,
   } = useContext(Context);
+
+  console.log(toggleValue);
 
   return (
     <section className="buttonCategory">
       { renderBtnCategory.map(({ strCategory }, index) => (
         <button
           data-testid={ `${strCategory}-category-filter` }
-          className="buttonCategory"
+          className={ `buttonCategory ${toggleValue === strCategory
+            ? 'buttonSelected' : ''}` }
           type="button"
           key={ index }
           name={ strCategory }
@@ -23,6 +27,15 @@ function ButtonFoodsCategory() {
           { strCategory }
         </button>
       ))}
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        className={ `buttonCategory ${toggleValue === ''
+          ? 'buttonSelected' : ''}` }
+        onClick={ () => handleClickFCategories('') }
+      >
+        All
+      </button>
     </section>
   );
 }

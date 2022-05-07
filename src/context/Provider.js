@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
-import { fetchFoodsCategory, fetchByFoodsCategory,
+import { fetchFoods, fetchDrinks, fetchFoodsCategory, fetchByFoodsCategory,
   fetchDrinksCategory, fetchByDrinksCategory } from '../services/fetchRecipesScreen';
 
 function Provider({ children }) {
@@ -9,6 +9,7 @@ function Provider({ children }) {
   const [renderBtnCategory, setRenderBtnCategory] = useState([]);
   const [renderDrinks, setRenderDrinks] = useState([]);
   const [renderDrinkCategory, setRenderDrinkCategory] = useState([]);
+  const [toggleValue, setToggleValue] = useState('');
 
   useEffect(() => {
     const getCategory = async () => {
@@ -19,7 +20,14 @@ function Provider({ children }) {
   }, []);
 
   const handleClickFCategories = async (category) => {
-    const getData = await fetchByFoodsCategory(category);
+    let getData = [];
+    if (category === toggleValue || category === '') {
+      setToggleValue('');
+      getData = await fetchFoods();
+    } else {
+      setToggleValue(category);
+      getData = await fetchByFoodsCategory(category);
+    }
     setRenderFoods([...getData]);
   };
 
@@ -33,10 +41,16 @@ function Provider({ children }) {
   }, []);
 
   const handleClickDCategories = async (category) => {
-    const getData = await fetchByDrinksCategory(category);
+    let getData = [];
+    if (category === toggleValue || category === '') {
+      setToggleValue('');
+      getData = await fetchDrinks();
+    } else {
+      setToggleValue(category);
+      getData = await fetchByDrinksCategory(category);
+    }
     setRenderDrinks([...getData]);
   };
-  // console.log(renderDrinks);
 
   const INITIAL_STATE = {
     renderFoods,
@@ -49,6 +63,8 @@ function Provider({ children }) {
     renderDrinkCategory,
     setRenderDrinkCategory,
     handleClickDCategories,
+    toggleValue,
+    setToggleValue,
   };
 
   return (

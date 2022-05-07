@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './RecipesCard.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
-function RecipeCard({ id, name, thumneal, pagina, index }) {
+function RecipeCard({ id, name, thumneal, index }) {
+  const { pathname } = useLocation();
+
   return (
     <div className="divCard">
-      <Link to={ `/${pagina}/${id}` }>
+      <Link to={ `/${pathname.includes('foods') ? 'foods' : 'drinks'}/${id}` }>
         <div className="boxCard" key={ id } data-testid={ `${index}-recipe-card` }>
           <div>
             <p data-testid={ `${index}-card-name` }>{ name }</p>
