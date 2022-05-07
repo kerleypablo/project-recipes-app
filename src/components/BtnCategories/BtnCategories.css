@@ -3,6 +3,9 @@
 }
 
 .buttonCategory {
-  display: row;
-  margin-left: 5px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10 px;
+  margin-top: 5px;
+  width: 300px;
 }

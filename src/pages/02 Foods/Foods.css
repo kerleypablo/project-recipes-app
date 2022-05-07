@@ -22,5 +22,13 @@
 
 .foodsCategorySection {
   display: flex;
+  flex-direction: row;
   width: 360px;
 }
+
+.buttonCategory {
+  margin-left: 30 px;
+  margin-top: 15px;
+  width: 200px;
+}
+

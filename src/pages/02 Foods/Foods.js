@@ -1,13 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
+import Context from '../../context/Context';
 import Header from '../../components/Header/Header';
 import RecipesCard from '../../components/RecipesScreen/RecipesCard';
 import Footer from '../../components/Footer/Footer';
 import ButtonFoodsCategory from '../../components/BtnCategories/BtnFoodsCategory';
-import { fetchFoods, fetchFoodsCategory } from '../../services/fetchRecipesScreen';
+import { fetchFoods } from '../../services/fetchRecipesScreen';
 import './Foods.css';
 
 function Foods() {
-  const [renderFoods, setRenderFoods] = useState([]);
+  const {
+    renderFoods,
+    setRenderFoods,
+  } = useContext(Context);
+
   useEffect(() => {
     const getFoods = async () => {
       const foods = await fetchFoods();
@@ -15,16 +20,15 @@ function Foods() {
       setRenderFoods(foodsList);
     };
     getFoods();
-  }, []);
-
-  const category = fetchFoodsCategory();
-  console.log(category);
+  }, [setRenderFoods]);
 
   return (
     <div>
       <Header PageTitle="Foods" />
-      <section className="foodsCategorySection">
+      <div className="buttonCategory">
         <ButtonFoodsCategory />
+      </div>
+      <section className="foodsCategorySection">
         {renderFoods.map(({ idMeal, strMealThumb, strMeal }, index) => (
           <RecipesCard
             index={ index }

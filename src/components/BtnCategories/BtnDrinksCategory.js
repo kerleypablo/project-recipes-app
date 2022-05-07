@@ -1,26 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { fetchDrinksCategory } from '../../services/fetchRecipesScreen';
+import React, { useContext } from 'react';
+import Context from '../../context/Context';
+import './BtnCategories.css';
 
 function ButtonDrinksCategory() {
-  const [renderFoodCategory, setRenderFoodCategory] = useState([]);
-
-  useEffect(() => {
-    const getCategory = async () => {
-      const categories = await fetchDrinksCategory();
-      const listCategory = [...categories];
-      setRenderFoodCategory(listCategory);
-    };
-    getCategory();
-  }, []);
+  const {
+    renderDrinkCategory,
+    handleClickDCategories,
+  } = useContext(Context);
 
   return (
-    <section>
-      { renderFoodCategory.map(({ strCategory }, index) => (
+    <section className="buttonCategory">
+      { renderDrinkCategory.map(({ strCategory }, index) => (
         <button
           data-testid={ `${strCategory}-category-filter` }
           className="buttonCategory"
           type="button"
           key={ index }
+          onClick={ () => handleClickDCategories(strCategory) }
         >
           { strCategory }
         </button>

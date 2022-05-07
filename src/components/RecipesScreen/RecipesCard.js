@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function RecipeCard({ id, name, thumneal, pagina, index }) {
   return (
-    <div className="boxScreen">
+    <div className="divCard">
       <Link to={ `/${pagina}/${id}` }>
         <div className="boxCard" key={ id } data-testid={ `${index}-recipe-card` }>
           <div>
