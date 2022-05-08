@@ -5,18 +5,18 @@ import { Link, useLocation } from 'react-router-dom';
 
 function RecipeCard({ id, name, thumneal, index }) {
   const { pathname } = useLocation();
-  console.log(thumneal);
+
   return (
-    <div className="divCard">
-      <Link to={ `/${pathname.includes('foods') ? 'foods' : 'drinks'}/${id}` }>
-        <div className="boxCard" key={ id } data-testid={ `${index}-recipe-card` }>
-          <div>
-            <p data-testid={ `${index}-card-name` }>{ name }</p>
-            <img src={ thumneal } alt={ name } data-testid={ `${index}-card-img` } />
-          </div>
+    <Link
+      to={ `/${pathname.includes('foods') ? 'foods' : 'drinks'}/${id}` }
+    >
+      <div className="card" key={ id } data-testid={ `${index}-recipe-card` }>
+        <div>
+          <p data-testid={ `${index}-card-name` }>{ name }</p>
+          <img src={ thumneal } alt={ name } data-testid={ `${index}-card-img` } />
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 }
 

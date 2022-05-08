@@ -1,4 +1,4 @@
-.boxCard {
+.card {
   border: 2px solid black;
   display: flex;
   flex-direction: row;
@@ -8,23 +8,17 @@
   width: 150px;
 }
 
-.boxCard:hover {
+.card:hover {
   width: 170px;
 }
 
-.boxCard img {
+.card img {
   border-radius: 5px;
   width: 100%;
 }
 
-.boxCard p {
+.card p {
   font-size: 12px;
   font-weight: 800;
   text-align: center;
 }
-
-.divCard {
-  display: row;
-  margin: auto;
-}
-
