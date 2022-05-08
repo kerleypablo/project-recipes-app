@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 function RecipeCard({ id, name, thumneal, index }) {
   const { pathname } = useLocation();
-
+  console.log(thumneal);
   return (
     <div className="divCard">
       <Link to={ `/${pathname.includes('foods') ? 'foods' : 'drinks'}/${id}` }>
