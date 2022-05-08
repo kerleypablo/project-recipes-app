@@ -17,7 +17,7 @@ function ExploreDrinks() {
           data-testid="explore-surprise"
           type="button"
         >
-          Surpresa Me!
+          Surprise me!
         </button>
       </section>
       <Footer />
