@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import fetchDrinkDetails from '../../services/fetchDrinkDetails';
 import getMeasures from '../../helpers/getMeasures';
 import ButtonShareAndFavorite
@@ -7,6 +8,7 @@ from '../../components/ButtonShareAndFavorite/ButtonShareAndFavorite';
 import './DrinksProgress.css';
 
 function DrinksProgress({ match: { params: { id } }, location: { pathname } }) {
+  const history = useHistory();
   const [drink, setDrink] = useState('');
   const [ingredientsList, setIngredientsList] = useState([]);
 
@@ -37,8 +39,7 @@ function DrinksProgress({ match: { params: { id } }, location: { pathname } }) {
   }, [drink]);
 
   const finishRecipe = () => {
-    console.log('finish');
-    // window.location.href = `/drinks/${drink.idDrink}/in-progress`;
+    history.push('/done-recipes');
   };
 
   return (
