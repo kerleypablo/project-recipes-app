@@ -11,9 +11,9 @@ function ButtonShareAndFavorite({ pathname, drink = '', food = '' }) {
       <div className="container-share-and-favorite-btn">
         <BtnShare pathname={ pathname } setCopy={ setCopy } />
         { drink === '' ? (
-          <BtnFavorite food={ food } />
+          <BtnFavorite food={ food } foodId={ food.idMeal } pathname={ pathname } />
         ) : (
-          <BtnFavorite drink={ drink } />
+          <BtnFavorite drink={ drink } drinkId={ drink.idDrink } pathname={ pathname } />
         )}
       </div>
       {copy && (

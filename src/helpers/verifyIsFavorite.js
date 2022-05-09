@@ -1,7 +1,7 @@
 const verifyIsFavorite = (foodId, drinkId) => {
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (favoriteRecipes) {
-    if (foodId.length > 0) {
+    if (foodId.length > 1) {
       return favoriteRecipes.some(
         (item) => item.id === foodId,
       );
