@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import BtnShare from '../BtnShare/BtnShare';
 import BtnFavorite from '../BtnFavorite/BtnFavorite';
+import './ButtonShareAndFavorite.css';
 
 function ButtonShareAndFavorite({ pathname, drink = '', food = '' }) {
   const [copy, setCopy] = useState(false);

@@ -70,19 +70,22 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   return (
     <div>
       { food !== '' ? (
-        <div>
-          <img
-            src={ food.strMealThumb }
-            alt={ food.strMeal }
-            width="400px"
-            data-testid="recipe-photo"
-          />
-          <h1 data-testid="recipe-title">{food.strMeal}</h1>
-          <p data-testid="recipe-category">{food.strCategory}</p>
-          <div>
-            <ButtonShareAndFavorite pathname={ pathname } food={ food } />
+        <div className="foodsDetails">
+          <div className="imgBox">
+            <img
+              src={ food.strMealThumb }
+              alt={ food.strMeal }
+              width="400px"
+              data-testid="recipe-photo"
+              className="imgFood"
+            />
+            <h1 data-testid="recipe-title">{food.strMeal}</h1>
+            <p data-testid="recipe-category">{food.strCategory}</p>
+            <div className="shareFav">
+              <ButtonShareAndFavorite pathname={ pathname } food={ food } />
+            </div>
           </div>
-          <div>
+          <div className="boxRecipies">
             <h2>Ingredients</h2>
             <ul>
               { ingredientsList.length > 0
@@ -97,7 +100,13 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
             </ul>
           </div>
           <div>
-            <p data-testid="instructions">{food.strInstructions}</p>
+            <p
+              className="pInstuctions"
+              data-testid="instructions"
+            >
+              {food.strInstructions}
+
+            </p>
           </div>
           <div>
             <iframe
@@ -106,15 +115,16 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
               data-testid="video"
               frameBorder="0"
               allowFullScreen
+              className="youtube"
             >
               <p>Seu navegador não possui Suporte para este recurso...</p>
             </iframe>
           </div>
-          <div>
+          <div className="recomendation-box">
             <h2>Recommended</h2>
             <div className="recomendation-cards">
               { recommendedCards.map((item, index) => (
-                <div key={ index }>
+                <div className="cardRecomended" key={ index }>
                   <img
                     width="100px"
                     key={ index }

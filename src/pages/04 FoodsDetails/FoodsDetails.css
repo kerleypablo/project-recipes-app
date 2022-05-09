@@ -1,20 +1,26 @@
-* {
-  margin: 0;
+.foodsDetails {
+  width: 100%;
 }
 
 .recomendation-cards {
-  border: 1px solid red;
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
   overflow: scroll;
-  width: 30%;
+  width: 50%;
+}
+
+.recomendation-box {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 120%;
 }
 
 .container-share-and-favorite-btn {
-  align-items: center;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .container-btn-start-recipe {
@@ -26,4 +32,53 @@
 .start-recipe {
   bottom: 0;
   position: fixed;
+}
+
+.imgBox {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.imgBox h1 {
+  bottom: 360px;
+  color: white;
+  font-size: 25px;
+  margin-left: 130px;
+  margin-right: 10px;
+  position: absolute;
+}
+
+.imgBox p {
+  font-weight: 700;
+  margin-left: 140px;
+}
+
+.shareFav {
+  margin-top: -20px;
+  width: 60%;
+}
+
+.imgFood {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 1px 3px 5px 1px gray;
+  height: 280px;
+  margin-bottom: 15px;
+  margin-left: 130px;
+  width: 80%;
+}
+
+.boxRecipies {
+  margin-left: 250px;
+}
+
+.pInstuctions {
+  margin-left: 160px;
+  margin-top: 30px;
+}
+
+.youtube {
+  height: 250px;
+  margin-left: 160px;
+  width: 70%;
 }

@@ -1,5 +1,6 @@
 const verifyIsFavorite = (food, drink) => {
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  console.log(food);
   if (favoriteRecipes) {
     if (food.idMeal !== undefined) {
       return favoriteRecipes.some(

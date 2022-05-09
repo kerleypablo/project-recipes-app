@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import verifyIsFavorite from '../../helpers/verifyIsFavorite';
+import './BtnFavorite.css';
 
 function BtnFavorite({ food = {}, drink = {} }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -72,7 +73,7 @@ function BtnFavorite({ food = {}, drink = {} }) {
   };
 
   return (
-    <div>
+    <div className="btnFavorite">
       { isFavorite ? (
         <button
           data-testid="favorite-btn"

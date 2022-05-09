@@ -21,14 +21,13 @@ header {
   width: 100%;
 }
 
-form {
+.formHeader {
   background-color: white;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-bottom: 20px;
-  padding-top: 10px;
-  width: 100%;
+  padding: 20px 10px 10px;
+  width: 96%;
 }
 
 .searchButton {
