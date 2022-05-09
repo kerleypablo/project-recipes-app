@@ -2,10 +2,14 @@
   margin: 0;
 }
 
+.container-main-foodProgress {
+  height: 100vh;
+  width: 100vw;
+}
+
 .container-checkbox-inputs {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 8%;
-  width: 100vw;
 }

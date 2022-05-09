@@ -47,7 +47,7 @@ function FoodsProgress({ match: { params: { id } }, location: { pathname } }) {
   };
 
   return (
-    <div className="container-main-foodDetails">
+    <div className="container-main-foodProgress">
       { food !== '' ? (
         <div>
           <img
@@ -63,7 +63,10 @@ function FoodsProgress({ match: { params: { id } }, location: { pathname } }) {
               <p data-testid="recipe-category">{food.strCategory}</p>
             </div>
             <div className="container-btn-share-and-favorite">
-              <ButtonShareAndFavorite pathname={ pathname } food={ food } />
+              <ButtonShareAndFavorite
+                pathname={ pathname.replace('/in-progress', '') }
+                food={ food }
+              />
             </div>
           </div>
           <div>

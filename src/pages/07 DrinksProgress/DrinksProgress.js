@@ -43,7 +43,7 @@ function DrinksProgress({ match: { params: { id } }, location: { pathname } }) {
   };
 
   return (
-    <div>
+    <div className="container-main-drinkProgress">
       { drink !== '' ? (
         <div>
           <img
@@ -54,8 +54,11 @@ function DrinksProgress({ match: { params: { id } }, location: { pathname } }) {
           />
           <h1 data-testid="recipe-title">{drink.strDrink}</h1>
           <p data-testid="recipe-category">{drink.strAlcoholic}</p>
-          <div>
-            <ButtonShareAndFavorite pathname={ pathname } drink={ drink } />
+          <div className="container-btn-share-and-favorite">
+            <ButtonShareAndFavorite
+              pathname={ pathname.replace('/in-progress', '') }
+              drink={ drink }
+            />
           </div>
           <div>
             <h2>Ingredients</h2>
