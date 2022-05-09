@@ -115,6 +115,7 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
             </ul>
           </div>
           <div>
+            <h2>Instructions</h2>
             <p data-testid="instructions">{food.strInstructions}</p>
           </div>
           <div>
