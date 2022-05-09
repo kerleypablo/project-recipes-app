@@ -15,3 +15,10 @@
 .selectedMeal {
   background-color: rgba(145, 143, 143, 0);
 }
+
+.container-buttons-explore {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+}
