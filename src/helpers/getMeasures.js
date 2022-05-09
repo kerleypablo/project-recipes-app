@@ -15,7 +15,6 @@ const getMeasures = (meals, ingredients) => {
       ingredients[index] = [...item, '', ''];
     }
   });
-  console.log(meals, ingredients);
   return ingredients;
 };
 
