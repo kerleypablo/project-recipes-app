@@ -5,6 +5,10 @@ import fetchRecommendedDrinks from '../../services/fetchRecommendedDrinks';
 import './FoodsDetails.css';
 import ButtonShareAndFavorite from
 '../../components/ButtonShareAndFavorite/ButtonShareAndFavorite';
+import verifyInProgressRecipes from '../../helpers/verifyInProgressRecipes';
+import BtnStateRecipe from '../../components/BtnStateRecipe/BtnStateRecipe';
+import getMeasures from '../../helpers/getMeasures';
+import verifyDoneRecipes from '../../helpers/verifyDoneRecipes';
 
 function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   const [food, setFood] = useState({
@@ -13,6 +17,7 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   });
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recommendedCards, setRecommendedCards] = useState([]);
+  const [stateRecipe, setStateRecipe] = useState('start');
 
   useEffect(() => {
     const getFoodDetails = async () => {
@@ -34,19 +39,6 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   }, []);
 
   useEffect(() => {
-    const getMeasures = (meals) => {
-      const arrFilter = Object.keys(meals).filter((item) => item.includes('strMeasure'));
-      let measures = [];
-      Object.entries(meals).forEach((item) => {
-        const findMeasure = arrFilter
-          .find((e) => e === item[0] && item[1] !== '' && item[1] !== null);
-        if (findMeasure) {
-          measures = [...measures, item];
-        }
-      });
-      return measures;
-    };
-
     const getIngredients = (meals) => {
       const arrFilter = (Object.keys(meals)
         .filter((item) => item.includes('strIngredient')));
@@ -65,7 +57,31 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
       setIngredientsList(ingredients);
     };
     getIngredients(food);
+    if (verifyDoneRecipes(food)) {
+      setStateRecipe('doneRecipe');
+    } else if (verifyInProgressRecipes(food)) {
+      setStateRecipe('inProgress');
+    }
   }, [food]);
+
+  const startRecipe = () => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes) {
+      const addRecipe = Object
+        .assign(inProgressRecipes.meals, ({ [food.idMeal]: [...ingredientsList] }));
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...inProgressRecipes,
+        meals: addRecipe,
+      }));
+    } else {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        meals: {
+          [food.idMeal]: [...ingredientsList] },
+        cocktails: {},
+      }));
+    }
+    window.location.href = `/foods/${food.idMeal}/in-progress`;
+  };
 
   return (
     <div>
@@ -128,16 +144,7 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
             </div>
           </div>
           <div className="container-btn-start-recipe">
-            <button
-              type="button"
-              className="start-recipe"
-              data-testid="start-recipe-btn"
-              onClick={ () => {
-                window.location.href = `/foods/${food.idMeal}/in-progress`;
-              } }
-            >
-              Start Recipe
-            </button>
+            <BtnStateRecipe startRecipe={ startRecipe } stateRecipe={ stateRecipe } />
           </div>
         </div>
       ) : (

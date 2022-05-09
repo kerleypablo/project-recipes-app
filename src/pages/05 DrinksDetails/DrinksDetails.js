@@ -4,12 +4,17 @@ import fetchDrinkDetails from '../../services/fetchDrinkDetails';
 import fetchRecommendedMeals from '../../services/fetchRecommendedMeals';
 import ButtonShareAndFavorite from
 '../../components/ButtonShareAndFavorite/ButtonShareAndFavorite';
+import verifyInProgressRecipes from '../../helpers/verifyInProgressRecipes';
+import BtnStateRecipe from '../../components/BtnStateRecipe/BtnStateRecipe';
+import getMeasures from '../../helpers/getMeasures';
+import verifyDoneRecipes from '../../helpers/verifyDoneRecipes';
 
 function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
   const [drink, setDrink] = useState('');
 
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recommendedCards, setRecommendedCards] = useState([]);
+  const [stateRecipe, setStateRecipe] = useState('start');
 
   useEffect(() => {
     const getDrinkDetails = async () => {
@@ -30,19 +35,6 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
   }, []);
 
   useEffect(() => {
-    const getMeasures = (drinks) => {
-      const arrFilter = Object.keys(drinks).filter((item) => item.includes('strMeasure'));
-      let measures = [];
-      Object.entries(drinks).forEach((item) => {
-        const findMeasure = arrFilter
-          .find((e) => e === item[0] && item[1] !== '' && item[1] !== null);
-        if (findMeasure) {
-          measures = [...measures, item];
-        }
-      });
-      return measures;
-    };
-
     const getIngredients = (drinks) => {
       const arrFilter = (Object.keys(drinks)
         .filter((item) => item.includes('strIngredient')));
@@ -61,7 +53,31 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
       setIngredientsList(ingredients);
     };
     getIngredients(drink);
+    if (verifyDoneRecipes({}, drink)) {
+      setStateRecipe('doneRecipe');
+    } else if (verifyInProgressRecipes({}, drink)) {
+      setStateRecipe('inProgress');
+    }
   }, [drink]);
+
+  const startRecipe = () => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes) {
+      const addRecipe = Object
+        .assign(inProgressRecipes.cocktails, ({ [drink.idDrink]: [...ingredientsList] }));
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...inProgressRecipes,
+        cocktails: addRecipe,
+      }));
+    } else {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        meals: {},
+        cocktails: {
+          [drink.idDrink]: [...ingredientsList] },
+      }));
+    }
+    window.location.href = `/drinks/${drink.idDrink}/in-progress`;
+  };
 
   return (
     <div>
@@ -113,16 +129,7 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
             </div>
           </div>
           <div className="container-btn-start-recipe">
-            <button
-              type="button"
-              className="start-recipe"
-              data-testid="start-recipe-btn"
-              onClick={ () => {
-                window.location.href = `/drinks/${drink.idDrink}/in-progress`;
-              } }
-            >
-              Start Recipe
-            </button>
+            <BtnStateRecipe startRecipe={ startRecipe } stateRecipe={ stateRecipe } />
           </div>
         </div>
       ) : (
