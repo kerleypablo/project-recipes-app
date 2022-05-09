@@ -15,3 +15,20 @@
   background-color: rgb(175, 171, 171);
   border: 2px solid rgb(103, 100, 100);
 }
+
+.recipeSection {
+  margin: auto;
+}
+
+.foodsCategorySection {
+  display: flex;
+  flex-direction: row;
+  width: 360px;
+}
+
+.buttonCategory {
+  margin-left: 30 px;
+  margin-top: 15px;
+  width: 200px;
+}
+
