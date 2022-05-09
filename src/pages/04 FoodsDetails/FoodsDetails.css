@@ -2,6 +2,31 @@
   margin: 0;
 }
 
+
+.container-main-foodDetails {
+  height: 100vh;
+  width: 100vw;
+}
+
+.container-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.container-btn-share-and-favorite {
+  align-items: center;
+  display: flex;
+  height: 64px;
+  justify-content: center;
+}
+
+.container-btn-share-and-favorite button {
+  border: none;
+  height: 50%;
+  margin: 0 auto;
+}
+
 .recomendation-cards {
   border: 1px solid red;
   box-sizing: border-box;

@@ -46,10 +46,7 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
           ingredients = [...ingredients, item];
         }
       });
-      const measures = getMeasures(drinks);
-      ingredients.forEach((item, index) => {
-        ingredients[index] = [...item, measures[index][1]];
-      });
+      ingredients = getMeasures(drinks, ingredients);
       setIngredientsList(ingredients);
     };
     getIngredients(drink);
@@ -103,7 +100,7 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
                   data-testid={ `${index}-ingredient-name-and-measure` }
                   key={ item[0] }
                 >
-                  { `${item[1]} - ${item[2]} ` }
+                  { `${item[1]} ${item[2]} ${item[3]} ` }
                 </li>
               ))}
             </ul>
