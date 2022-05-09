@@ -4,6 +4,7 @@ import fetchDrinkDetails from '../../services/fetchDrinkDetails';
 import getMeasures from '../../helpers/getMeasures';
 import ButtonShareAndFavorite
 from '../../components/ButtonShareAndFavorite/ButtonShareAndFavorite';
+import './DrinksProgress.css';
 
 function DrinksProgress({ match: { params: { id } }, location: { pathname } }) {
   const [drink, setDrink] = useState('');
@@ -57,17 +58,22 @@ function DrinksProgress({ match: { params: { id } }, location: { pathname } }) {
           </div>
           <div>
             <h2>Ingredients</h2>
-            <ul>
+            <div className="container-checkbox-inputs">
               { ingredientsList.length > 0
               && ingredientsList.map((item, index) => (
-                <li
-                  data-testid={ `${index}-ingredient-step` }
+                <label
                   key={ item[0] }
+                  htmlFor={ `${index}-ingredient-step` }
+                  data-testid={ `${index}-ingredient-step` }
                 >
+                  <input
+                    type="checkbox"
+                    id={ `${index}-ingredient-step` }
+                  />
                   { `${item[1]} ${item[2]} ${item[3]} ` }
-                </li>
+                </label>
               ))}
-            </ul>
+            </div>
           </div>
           <div>
             <h2>Instructions</h2>
