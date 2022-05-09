@@ -1,13 +1,13 @@
-const verifyIsFavorite = (food, drink) => {
+const verifyIsFavorite = (foodId, drinkId) => {
   const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
   if (favoriteRecipes) {
-    if (food.idMeal !== undefined) {
+    if (foodId.length > 0) {
       return favoriteRecipes.some(
-        (item) => item.id === food.idMeal,
+        (item) => item.id === foodId,
       );
     }
     return favoriteRecipes.some(
-      (item) => item.id === drink.idDrink,
+      (item) => item.id === drinkId,
     );
   }
 };

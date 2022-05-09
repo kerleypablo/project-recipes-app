@@ -8,7 +8,10 @@ function BtnFavorite({ food = {}, drink = {} }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    setIsFavorite(verifyIsFavorite(food, drink));
+    if (food.idMeal !== undefined) {
+      return setIsFavorite(verifyIsFavorite(food.idMeal));
+    }
+    setIsFavorite(verifyIsFavorite('', drink.idDrink));
   }, [food, drink]);
 
   const favoriteRecipeFunc = () => {
