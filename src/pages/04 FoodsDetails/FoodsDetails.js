@@ -8,6 +8,7 @@ import ButtonShareAndFavorite from
 import verifyInProgressRecipes from '../../helpers/verifyInProgressRecipes';
 import BtnStateRecipe from '../../components/BtnStateRecipe/BtnStateRecipe';
 import getMeasures from '../../helpers/getMeasures';
+import verifyDoneRecipes from '../../helpers/verifyDoneRecipes';
 
 function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   const [food, setFood] = useState({
@@ -56,16 +57,29 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
       setIngredientsList(ingredients);
     };
     getIngredients(food);
-    if (verifyInProgressRecipes(food)) {
+    if (verifyDoneRecipes(food)) {
+      setStateRecipe('doneRecipe');
+    } else if (verifyInProgressRecipes(food)) {
       setStateRecipe('inProgress');
     }
   }, [food]);
 
   const startRecipe = () => {
-    localStorage.setItem('inProgressRecipes', JSON.stringify({
-      meals: {
-        [food.idMeal]: [...ingredientsList] },
-    }));
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes) {
+      const addRecipe = Object
+        .assign(inProgressRecipes.meals, ({ [food.idMeal]: [...ingredientsList] }));
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...inProgressRecipes,
+        meals: addRecipe,
+      }));
+    } else {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        meals: {
+          [food.idMeal]: [...ingredientsList] },
+        cocktails: {},
+      }));
+    }
     window.location.href = `/foods/${food.idMeal}/in-progress`;
   };
 
