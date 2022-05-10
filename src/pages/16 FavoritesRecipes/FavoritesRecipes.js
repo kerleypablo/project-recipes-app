@@ -31,7 +31,7 @@ function FavoritesRecipes() {
 
   return (
     <div>
-      <Header PageTitle="Favorite recipes" />
+      <Header PageTitle="Favorite Recipes" />
       <div className="box-btmdoneRecipes">
         <button
           data-testid="filter-by-all-btn"
@@ -60,7 +60,8 @@ function FavoritesRecipes() {
       </div>
       <div>
         {
-          FavoritesAndDone.filter((tipo) => (tipo.type !== SelectedType))
+          FavoritesAndDone
+          && FavoritesAndDone.filter((tipo) => (tipo.type !== SelectedType))
             .map((receita, index) => (
               <div key={ index }>
                 <CardFavotiteRecipies
