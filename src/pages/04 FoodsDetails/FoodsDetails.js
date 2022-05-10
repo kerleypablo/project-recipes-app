@@ -90,17 +90,24 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
             width="100%"
             height="400px"
             data-testid="recipe-photo"
+            className="foodimg-Details"
           />
           <div className="container-title">
             <div>
-              <h1 data-testid="recipe-title">{food.strMeal}</h1>
+              <h1
+                data-testid="recipe-title"
+                className="name-recipes-detail"
+              >
+                {food.strMeal}
+
+              </h1>
               <p data-testid="recipe-category">{food.strCategory}</p>
             </div>
             <div className="container-btn-share-and-favorite">
               <ButtonShareAndFavorite pathname={ pathname } food={ food } />
             </div>
           </div>
-          <div>
+          <div className="boxRecipies">
             <h2>Ingredients</h2>
             <ul>
               { ingredientsList.length > 0
@@ -114,9 +121,14 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
               ))}
             </ul>
           </div>
-          <div>
+          <div className="boxInstructions">
             <h2>Instructions</h2>
-            <p data-testid="instructions">{food.strInstructions}</p>
+            <p
+              className="pInstuctions"
+              data-testid="instructions"
+            >
+              {food.strInstructions}
+            </p>
           </div>
           <div>
             <iframe
@@ -125,15 +137,16 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
               data-testid="video"
               frameBorder="0"
               allowFullScreen
+              className="youtube"
             >
               <p>Seu navegador não possui Suporte para este recurso...</p>
             </iframe>
           </div>
-          <div>
+          <div className="recomendation-box">
             <h2>Recommended</h2>
             <div className="recomendation-cards">
               { recommendedCards.map((item, index) => (
-                <div key={ index }>
+                <div className="cardRecomended" key={ index }>
                   <img
                     width="100px"
                     key={ index }

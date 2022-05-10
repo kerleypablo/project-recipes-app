@@ -99,7 +99,7 @@ function HeaderDrinks({ PageTitle }) {
       { Search.search
         ? (
           <div className="boxSearch">
-            <form>
+            <form className="formHeader">
               <input
                 className="searchInput"
                 type="text"

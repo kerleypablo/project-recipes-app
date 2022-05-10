@@ -1,11 +1,26 @@
-* {
-  margin: 0;
+.foodsDetails {
+  width: 100%;
 }
 
 
 .container-main-foodDetails {
   height: 100vh;
   width: 100vw;
+}
+
+.foodimg-Details {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 320px;
+  width: 360px;
+}
+
+.name-recipes-detail {
+  color: black;
+  font-size: 35px;
+  left: 16px;
+  position: absolute;
+  top: 270px;
 }
 
 .container-title {
@@ -28,18 +43,24 @@
 }
 
 .recomendation-cards {
-  border: 1px solid red;
   box-sizing: border-box;
   display: flex;
   flex-flow: row nowrap;
   overflow: scroll;
-  width: 30%;
+  width: 50%;
+}
+
+.recomendation-box {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
 }
 
 .container-share-and-favorite-btn {
-  align-items: center;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
 .container-btn-start-recipe {
@@ -51,4 +72,64 @@
 .start-recipe {
   bottom: 0;
   position: fixed;
+}
+
+.imgBox {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.imgBox h1 {
+  bottom: 360px;
+  color: white;
+  font-size: 25px;
+  margin-left: 130px;
+  margin-right: 10px;
+  position: absolute;
+}
+
+.imgBox p {
+  font-weight: 700;
+  margin-left: 140px;
+}
+
+.shareFav {
+  margin-top: -20px;
+  width: 60%;
+}
+
+.imgFood {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 1px 3px 5px 1px gray;
+  height: 280px;
+  margin-bottom: 15px;
+  margin-left: 130px;
+  width: 80%;
+}
+
+.boxRecipies {
+  background-color: rgba(128, 128, 128, 0.109);
+  border: 2px solid rgba(0, 0, 0, 0.271);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding-left: 80px;
+  padding-top: 20px;
+}
+
+.pInstuctions {
+  margin: 10px 30px;
+}
+
+.youtube {
+  height: 250px;
+  margin: 20px;
+  width: 90%;
+}
+
+.boxInstructions {
+  border-bottom: 8px solid rgba(0, 0, 0, 0.493);
+  border-radius: 20px;
+  border-top: 8px solid rgba(0, 0, 0, 0.493);
+  margin-bottom: 15px;
 }

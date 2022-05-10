@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import verifyIsFavorite from '../../helpers/verifyIsFavorite';
+import './BtnFavorite.css';
 
-function BtnFavorite({ food = '', drink = '', foodId = '', drinkId = '' }) {
+function BtnFavorite({ food = '', drink = '', foodId = '',
+  drinkId = '', func, datatest }) {
+
   const [isFavorite, setIsFavorite] = useState(false);
-
   useEffect(() => {
     if (typeof (food) === 'object') {
       return setIsFavorite(verifyIsFavorite(foodId));
@@ -72,10 +74,11 @@ function BtnFavorite({ food = '', drink = '', foodId = '', drinkId = '' }) {
     setIsFavorite(false);
     localStorage.setItem('favoriteRecipes',
       JSON.stringify(favoriteRecipes.filter((item) => item !== recipe)));
+    func();
   };
 
   return (
-    <div>
+    <div className="btnFavorite">
       { isFavorite ? (
         <button
           data-testid="favorite-btn"
@@ -83,7 +86,7 @@ function BtnFavorite({ food = '', drink = '', foodId = '', drinkId = '' }) {
           src={ blackHeartIcon }
           onClick={ () => removeFavorite() }
         >
-          <img src={ blackHeartIcon } alt="Icon black heart" />
+          <img src={ blackHeartIcon } alt="Icon black heart" data-testid={ datatest } />
         </button>
       ) : (
         <button
@@ -92,7 +95,7 @@ function BtnFavorite({ food = '', drink = '', foodId = '', drinkId = '' }) {
           src={ whiteHeartIcon }
           onClick={ () => favoriteRecipeFunc() }
         >
-          <img src={ whiteHeartIcon } alt="Icon white heart" />
+          <img src={ whiteHeartIcon } alt="Icon white heart" data-testid={ datatest } />
         </button>
       )}
     </div>

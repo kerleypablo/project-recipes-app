@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import shareIcon from '../../images/shareIcon.svg';
+import './BtnShare.css';
 
 function BtnShare({ pathname, setCopy }) {
   const copyToClipBoard = async (link) => {
@@ -11,7 +12,7 @@ function BtnShare({ pathname, setCopy }) {
   };
 
   return (
-    <div>
+    <div className="btnShare">
       <button
         data-testid="share-btn"
         type="button"

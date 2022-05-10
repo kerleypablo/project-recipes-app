@@ -10,7 +10,7 @@ function ButtonDrinksCategory() {
   } = useContext(Context);
 
   return (
-    <section className="buttonCategory">
+    <section className="buttonCategory_Food">
       { renderDrinkCategory.map(({ strCategory }, index) => (
         <button
           data-testid={ `${strCategory}-category-filter` }

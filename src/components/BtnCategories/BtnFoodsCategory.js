@@ -12,7 +12,7 @@ function ButtonFoodsCategory() {
   console.log(toggleValue);
 
   return (
-    <section className="buttonCategory">
+    <section className="buttonCategory_Food">
       { renderBtnCategory.map(({ strCategory }, index) => (
         <button
           data-testid={ `${strCategory}-category-filter` }
