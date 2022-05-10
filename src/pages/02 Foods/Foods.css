@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+}
+
+.selectedDrink {
+  background-color: rgba(175, 171, 171, 0);
+
+}
+
+.selectedexplorer {
+  background-color: rgba(175, 171, 171, 0);
+}
+
+.boxButtons {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: 30 px;
+  width: 360px;
+}
+
+.foodsCategorySection {
+  flex-wrap: wrap;
+  height: 370px;
+  overflow-y: scroll;
+  width: 12px;
+}

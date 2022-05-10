@@ -1,19 +1,24 @@
-.boxCard {
-  border-radius: 5px;
-  box-shadow: 2px 2px 5px gray;
-  margin: 10px;
+.card {
+  border: 2px solid black;
+  display: flex;
+  flex-direction: row;
   margin-left: 20px;
   padding-top: 10px;
   transition: 1s;
-  width: 120px;
+  width: 150px;
+  z-index: -1;
 }
 
-.boxCard img {
+.card:hover {
+  width: 170px;
+}
+
+.card img {
   border-radius: 5px;
   width: 100%;
 }
 
-.boxCard p {
+.card p {
   font-size: 12px;
   font-weight: 800;
   text-align: center;

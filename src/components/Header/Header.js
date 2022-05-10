@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProfileIcon from '../../images/profileIcon.svg';
@@ -6,14 +6,16 @@ import SearchIcon from '../../images/searchIcon.svg';
 import './Header.css';
 import HeaderApiFood from '../../redux/Services/HeaderApiFood';
 import CardReceita from '../Receitas/CardReceita';
+import Context from '../../context/Context';
 
 function Header({ PageTitle }) {
-  const [Search, setSearch] = useState({
-    search: false,
-    RadioSelected: '',
-    searchValue: '',
-    inputSerach: '',
-  });
+  const { Search, setSearch } = useContext(Context);
+  // const [Search, setSearch] = useState({
+  //   search: false,
+  //   RadioSelected: '',
+  //   searchValue: '',
+  //   inputSerach: '',
+  // });
   const [Data, setData] = useState([]);
 
   const handleButton = async () => {

@@ -15,3 +15,14 @@
   background-color: rgba(145, 143, 143, 0);
 
 }
+
+.foodsCategorySection {
+  display: flex;
+  flex-direction: row;
+  width: 360px;
+}
+
+.buttonCategory {
+  margin-left: 30 px;
+  margin-top: 15px;
+}

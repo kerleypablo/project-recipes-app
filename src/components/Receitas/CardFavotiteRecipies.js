@@ -8,7 +8,7 @@ import BtnFavorite from '../BtnFavorite/BtnFavorite';
 
 function CardFavotiteRecipies({
   id, name, thumneal, index, nacionalidade,
-  pagina, category, alcholic, type, receita }) {
+  pagina, category, alcholic, type, receita, func }) {
   name.toLowerCase();
   const [CopyShare, seCopyshare] = useState('');
 
@@ -22,7 +22,6 @@ function CardFavotiteRecipies({
       seCopyshare('Link copied!'),
     ).catch((error) => console.log(error));
   }
-  console.log(receita);
   return (
     <div className="boxCard-Done" key={ id } data-testid={ `${index}-recipe-card` }>
       <Link to={ `/${pagina.toLowerCase()}/${id}` }>
@@ -51,7 +50,7 @@ function CardFavotiteRecipies({
           </div>
         </div>
       </Link>
-      <div>
+      <div className="sharefav">
         <button
           type="button"
           onClick={ handleShare }
@@ -67,16 +66,24 @@ function CardFavotiteRecipies({
         {
           type === 'drink'
             ? (
-              <BtnFavorite
-                drink={ receita }
-                data-testid={ `${index}-horizontal-favorite-btn` }
-              />
+              <div className="favbtn-donerecipes">
+                <BtnFavorite
+                  drinkId={ id }
+                  drink={ receita }
+                  func={ func }
+                  datatest={ `${index}-horizontal-favorite-btn` }
+                />
+              </div>
             )
             : (
-              <BtnFavorite
-                food={ receita }
-                data-testid={ `${index}-horizontal-favorite-btn` }
-              />
+              <div className="favbtn-donerecipes">
+                <BtnFavorite
+                  foodId={ id }
+                  food={ receita }
+                  func={ func }
+                  datatest={ `${index}-horizontal-favorite-btn` }
+                />
+              </div>
             )
         }
       </div>
@@ -94,7 +101,10 @@ CardFavotiteRecipies.propTypes = {
   category: PropTypes.string.isRequired,
   alcholic: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  receita: PropTypes.shape.isRequired,
+  receita: PropTypes.shape({
+    receita: PropTypes.string,
+  }).isRequired,
+  func: PropTypes.func.isRequired,
 };
 
 export default CardFavotiteRecipies;

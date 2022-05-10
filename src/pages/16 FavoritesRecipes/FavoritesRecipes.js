@@ -4,7 +4,7 @@ import CardFavotiteRecipies from '../../components/Receitas/CardFavotiteRecipies
 import './FavoritesRecipes.css';
 
 function FavoritesRecipes() {
-  const Favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  let Favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
   const Donerecipies = localStorage.DoneRecipies;
   const [SelectedType, setSelectedType] = useState('');
   const [FavoritesAndDone, setFavoritesandDone] = useState(Favorites, Donerecipies);
@@ -12,6 +12,12 @@ function FavoritesRecipes() {
   useEffect(() => {
 
   }, [SelectedType, Favorites]);
+
+  const RemoveFavoriteLocalstorage = () => {
+    Favorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    setFavoritesandDone(Favorites, Donerecipies);
+    console.log('executei');
+  };
 
   function filterDoneRecipes({ target }) {
     if (target.name === 'food') {
@@ -70,6 +76,7 @@ function FavoritesRecipes() {
                   alcholic={ receita.alcoholicOrNot }
                   type={ receita.type }
                   receita={ receita }
+                  func={ RemoveFavoriteLocalstorage }
                 />
               </div>
             ))

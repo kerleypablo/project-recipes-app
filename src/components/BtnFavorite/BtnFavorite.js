@@ -5,17 +5,20 @@ import blackHeartIcon from '../../images/blackHeartIcon.svg';
 import verifyIsFavorite from '../../helpers/verifyIsFavorite';
 import './BtnFavorite.css';
 
-function BtnFavorite({ food = {}, drink = {} }) {
+function BtnFavorite({ food = '', drink = '', foodId = '',
+  drinkId = '', func, datatest }) {
   const [isFavorite, setIsFavorite] = useState(false);
-
   useEffect(() => {
-    setIsFavorite(verifyIsFavorite(food, drink));
-  }, [food, drink]);
+    if (typeof (food) === 'object') {
+      return setIsFavorite(verifyIsFavorite(foodId));
+    }
+    setIsFavorite(verifyIsFavorite('', drinkId));
+  }, [foodId, drinkId, food]);
 
   const favoriteRecipeFunc = () => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
     setIsFavorite(true);
-    if (food.idMeal !== undefined) {
+    if (typeof (food) === 'object') {
       if (favoriteRecipes) {
         const newArrFavorite = JSON.stringify([...favoriteRecipes, {
           id: food.idMeal,
@@ -64,12 +67,13 @@ function BtnFavorite({ food = {}, drink = {} }) {
 
   const removeFavorite = () => {
     const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    const recipe = favoriteRecipes.find((item) => item.id === food.idMeal
-    || item.id === drink.idDrink);
+    const recipe = favoriteRecipes.find((item) => item.id === foodId
+    || item.id === drinkId);
     favoriteRecipes.filter((item) => item !== recipe);
     setIsFavorite(false);
     localStorage.setItem('favoriteRecipes',
       JSON.stringify(favoriteRecipes.filter((item) => item !== recipe)));
+    func();
   };
 
   return (
@@ -81,7 +85,7 @@ function BtnFavorite({ food = {}, drink = {} }) {
           src={ blackHeartIcon }
           onClick={ () => removeFavorite() }
         >
-          <img src={ blackHeartIcon } alt="Icon black heart" />
+          <img src={ blackHeartIcon } alt="Icon black heart" data-testid={ datatest } />
         </button>
       ) : (
         <button
@@ -90,7 +94,7 @@ function BtnFavorite({ food = {}, drink = {} }) {
           src={ whiteHeartIcon }
           onClick={ () => favoriteRecipeFunc() }
         >
-          <img src={ whiteHeartIcon } alt="Icon white heart" />
+          <img src={ whiteHeartIcon } alt="Icon white heart" data-testid={ datatest } />
         </button>
       )}
     </div>

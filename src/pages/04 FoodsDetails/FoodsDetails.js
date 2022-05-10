@@ -5,6 +5,10 @@ import fetchRecommendedDrinks from '../../services/fetchRecommendedDrinks';
 import './FoodsDetails.css';
 import ButtonShareAndFavorite from
 '../../components/ButtonShareAndFavorite/ButtonShareAndFavorite';
+import verifyInProgressRecipes from '../../helpers/verifyInProgressRecipes';
+import BtnStateRecipe from '../../components/BtnStateRecipe/BtnStateRecipe';
+import getMeasures from '../../helpers/getMeasures';
+import verifyDoneRecipes from '../../helpers/verifyDoneRecipes';
 
 function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   const [food, setFood] = useState({
@@ -13,6 +17,7 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   });
   const [ingredientsList, setIngredientsList] = useState([]);
   const [recommendedCards, setRecommendedCards] = useState([]);
+  const [stateRecipe, setStateRecipe] = useState('start');
 
   useEffect(() => {
     const getFoodDetails = async () => {
@@ -34,19 +39,6 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   }, []);
 
   useEffect(() => {
-    const getMeasures = (meals) => {
-      const arrFilter = Object.keys(meals).filter((item) => item.includes('strMeasure'));
-      let measures = [];
-      Object.entries(meals).forEach((item) => {
-        const findMeasure = arrFilter
-          .find((e) => e === item[0] && item[1] !== '' && item[1] !== null);
-        if (findMeasure) {
-          measures = [...measures, item];
-        }
-      });
-      return measures;
-    };
-
     const getIngredients = (meals) => {
       const arrFilter = (Object.keys(meals)
         .filter((item) => item.includes('strIngredient')));
@@ -58,30 +50,60 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
           ingredients = [...ingredients, item];
         }
       });
-      const measures = getMeasures(food);
-      ingredients.forEach((item, index) => {
-        ingredients[index] = [...item, measures[index][1]];
-      });
+      ingredients = getMeasures(food, ingredients);
       setIngredientsList(ingredients);
     };
     getIngredients(food);
+    if (verifyDoneRecipes(food)) {
+      setStateRecipe('doneRecipe');
+    } else if (verifyInProgressRecipes(food)) {
+      setStateRecipe('inProgress');
+    }
   }, [food]);
 
+  const startRecipe = () => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (inProgressRecipes) {
+      const addRecipe = Object
+        .assign(inProgressRecipes.meals, ({ [food.idMeal]: [...ingredientsList] }));
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        ...inProgressRecipes,
+        meals: addRecipe,
+      }));
+    } else {
+      localStorage.setItem('inProgressRecipes', JSON.stringify({
+        meals: {
+          [food.idMeal]: [...ingredientsList] },
+        cocktails: {},
+      }));
+    }
+    window.location.href = `/foods/${food.idMeal}/in-progress`;
+  };
+
   return (
-    <div>
+    <div className="container-main-foodDetails">
       { food !== '' ? (
-        <div className="foodsDetails">
-          <div className="imgBox">
-            <img
-              src={ food.strMealThumb }
-              alt={ food.strMeal }
-              width="400px"
-              data-testid="recipe-photo"
-              className="imgFood"
-            />
-            <h1 data-testid="recipe-title">{food.strMeal}</h1>
-            <p data-testid="recipe-category">{food.strCategory}</p>
-            <div className="shareFav">
+        <div>
+          <img
+            src={ food.strMealThumb }
+            alt={ food.strMeal }
+            width="100%"
+            height="400px"
+            data-testid="recipe-photo"
+            className="foodimg-Details"
+          />
+          <div className="container-title">
+            <div>
+              <h1
+                data-testid="recipe-title"
+                className="name-recipes-detail"
+              >
+                {food.strMeal}
+
+              </h1>
+              <p data-testid="recipe-category">{food.strCategory}</p>
+            </div>
+            <div className="container-btn-share-and-favorite">
               <ButtonShareAndFavorite pathname={ pathname } food={ food } />
             </div>
           </div>
@@ -94,12 +116,12 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
                   data-testid={ `${index}-ingredient-name-and-measure` }
                   key={ item[0] }
                 >
-                  { `${item[1]} - ${item[2]} ` }
+                  { `${item[1]} ${item[2]} ${item[3]} ` }
                 </li>
               ))}
             </ul>
           </div>
-          <div>
+          <div className="boxInstructions">
             <p
               className="pInstuctions"
               data-testid="instructions"
@@ -138,16 +160,7 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
             </div>
           </div>
           <div className="container-btn-start-recipe">
-            <button
-              type="button"
-              className="start-recipe"
-              data-testid="start-recipe-btn"
-              onClick={ () => {
-                window.location.href = `/foods/${food.idMeal}/in-progress`;
-              } }
-            >
-              Start Recipe
-            </button>
+            <BtnStateRecipe startRecipe={ startRecipe } stateRecipe={ stateRecipe } />
           </div>
         </div>
       ) : (

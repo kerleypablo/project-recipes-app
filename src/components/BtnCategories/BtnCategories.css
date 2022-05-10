@@ -1,0 +1,24 @@
+* {
+  margin: 0;
+}
+
+.buttonSelected {
+  background-color: #28a745;
+}
+
+
+.buttonCategory_Food {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px;
+  margin-top: 60px;
+}
+
+.buttonCategory_Food button {
+  border-radius: 6px;
+  height: 30px;
+  margin-left: 10px;
+  margin-top: 10px;
+  width: 125px;
+}
