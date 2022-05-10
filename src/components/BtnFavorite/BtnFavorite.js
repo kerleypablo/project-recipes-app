@@ -6,8 +6,7 @@ import verifyIsFavorite from '../../helpers/verifyIsFavorite';
 import './BtnFavorite.css';
 
 function BtnFavorite({ food = '', drink = '', foodId = '',
-  drinkId = '', func, datatest }) {
-
+  drinkId = '', func = '', datatest }) {
   const [isFavorite, setIsFavorite] = useState(false);
   useEffect(() => {
     if (typeof (food) === 'object') {
@@ -74,7 +73,9 @@ function BtnFavorite({ food = '', drink = '', foodId = '',
     setIsFavorite(false);
     localStorage.setItem('favoriteRecipes',
       JSON.stringify(favoriteRecipes.filter((item) => item !== recipe)));
-    func();
+    if (typeof (func) === 'function') {
+      func();
+    }
   };
 
   return (
