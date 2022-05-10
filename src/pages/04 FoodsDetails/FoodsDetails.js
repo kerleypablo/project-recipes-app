@@ -122,12 +122,12 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
             </ul>
           </div>
           <div className="boxInstructions">
+            <h2>Instructions</h2>
             <p
               className="pInstuctions"
               data-testid="instructions"
             >
               {food.strInstructions}
-
             </p>
           </div>
           <div>

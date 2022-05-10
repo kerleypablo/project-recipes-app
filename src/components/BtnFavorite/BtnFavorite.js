@@ -7,6 +7,7 @@ import './BtnFavorite.css';
 
 function BtnFavorite({ food = '', drink = '', foodId = '',
   drinkId = '', func, datatest }) {
+
   const [isFavorite, setIsFavorite] = useState(false);
   useEffect(() => {
     if (typeof (food) === 'object') {

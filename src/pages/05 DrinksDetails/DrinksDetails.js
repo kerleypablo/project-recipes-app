@@ -116,6 +116,7 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
             </ul>
           </div>
           <div className="boxInstructions">
+            <h2>Instructions</h2>
             <p data-testid="instructions">{drink.strInstructions}</p>
           </div>
           <div className="recomendation-box">
