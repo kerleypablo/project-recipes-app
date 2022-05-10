@@ -36,7 +36,7 @@ function Foods() {
             </>
           )
           : (
-            <div>
+            <div className="container-recipes-card">
               {renderFoods.map(({ idMeal, strMealThumb, strMeal }, index) => (
                 <RecipesCard
                   index={ index }

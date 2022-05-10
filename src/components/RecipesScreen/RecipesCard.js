@@ -9,8 +9,9 @@ function RecipeCard({ id, name, thumneal, index }) {
   return (
     <Link
       to={ `/${pathname.includes('foods') ? 'foods' : 'drinks'}/${id}` }
+      data-testid={ `${index}-recipe-card` }
     >
-      <div className="card" key={ id } data-testid={ `${index}-recipe-card` }>
+      <div className="card" key={ id }>
         <div>
           <p data-testid={ `${index}-card-name` }>{ name }</p>
           <img src={ thumneal } alt={ name } data-testid={ `${index}-card-img` } />

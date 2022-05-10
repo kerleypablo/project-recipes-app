@@ -24,3 +24,10 @@
   overflow-y: scroll;
   width: 12px;
 }
+
+.container-recipes-card {
+  display: flex;
+  flex-flow: column wrap;
+  height: 100vh;
+  justify-content: center;
+}
