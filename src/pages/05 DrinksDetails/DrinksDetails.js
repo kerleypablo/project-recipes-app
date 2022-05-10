@@ -8,6 +8,7 @@ import verifyInProgressRecipes from '../../helpers/verifyInProgressRecipes';
 import BtnStateRecipe from '../../components/BtnStateRecipe/BtnStateRecipe';
 import getMeasures from '../../helpers/getMeasures';
 import verifyDoneRecipes from '../../helpers/verifyDoneRecipes';
+import './DrinksDetails.css';
 
 function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
   const [drink, setDrink] = useState('');
@@ -46,10 +47,7 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
           ingredients = [...ingredients, item];
         }
       });
-      const measures = getMeasures(drinks);
-      ingredients.forEach((item, index) => {
-        ingredients[index] = [...item, measures[index][1]];
-      });
+      ingredients = getMeasures(drinks, ingredients);
       setIngredientsList(ingredients);
     };
     getIngredients(drink);
@@ -80,7 +78,7 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
   };
 
   return (
-    <div>
+    <div className="container-main-foodDetails">
       { drink !== '' ? (
         <div>
           <img
@@ -88,13 +86,22 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
             alt={ drink.strDrink }
             width="400px"
             data-testid="recipe-photo"
+            className="foodimg-Details"
           />
-          <h1 data-testid="recipe-title">{drink.strDrink}</h1>
-          <p data-testid="recipe-category">{drink.strAlcoholic}</p>
-          <div>
-            <ButtonShareAndFavorite pathname={ pathname } drink={ drink } />
+          <div className="container-title">
+            <h1
+              data-testid="recipe-title"
+              className="name-recipes-detail"
+            >
+              {drink.strDrink}
+
+            </h1>
+            <p data-testid="recipe-category">{drink.strAlcoholic}</p>
+            <div className="container-btn-share-and-favorite">
+              <ButtonShareAndFavorite pathname={ pathname } drink={ drink } />
+            </div>
           </div>
-          <div>
+          <div className="boxRecipies">
             <h2>Ingredients</h2>
             <ul>
               { ingredientsList.length > 0
@@ -103,15 +110,15 @@ function DrinksDetails({ match: { params: { id } }, location: { pathname } }) {
                   data-testid={ `${index}-ingredient-name-and-measure` }
                   key={ item[0] }
                 >
-                  { `${item[1]} - ${item[2]} ` }
+                  { `${item[1]} ${item[2]} ${item[3]} ` }
                 </li>
               ))}
             </ul>
           </div>
-          <div>
+          <div className="boxInstructions">
             <p data-testid="instructions">{drink.strInstructions}</p>
           </div>
-          <div>
+          <div className="recomendation-box">
             <h2>Recommended</h2>
             <div className="recomendation-cards">
               { recommendedCards.map((item, index) => (

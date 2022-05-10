@@ -53,3 +53,12 @@
   font-size: large;
   margin-bottom: 1px;
 }
+
+.sharefav {
+  display: flex;
+  flex-direction: row;
+}
+
+.favbtn-donerecipes {
+  padding-top: 15px;
+}

@@ -50,10 +50,7 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
           ingredients = [...ingredients, item];
         }
       });
-      const measures = getMeasures(food);
-      ingredients.forEach((item, index) => {
-        ingredients[index] = [...item, measures[index][1]];
-      });
+      ingredients = getMeasures(food, ingredients);
       setIngredientsList(ingredients);
     };
     getIngredients(food);
@@ -84,21 +81,33 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   };
 
   return (
-    <div>
+    <div className="container-main-foodDetails">
       { food !== '' ? (
         <div>
           <img
             src={ food.strMealThumb }
             alt={ food.strMeal }
-            width="400px"
+            width="100%"
+            height="400px"
             data-testid="recipe-photo"
+            className="foodimg-Details"
           />
-          <h1 data-testid="recipe-title">{food.strMeal}</h1>
-          <p data-testid="recipe-category">{food.strCategory}</p>
-          <div>
-            <ButtonShareAndFavorite pathname={ pathname } food={ food } />
+          <div className="container-title">
+            <div>
+              <h1
+                data-testid="recipe-title"
+                className="name-recipes-detail"
+              >
+                {food.strMeal}
+
+              </h1>
+              <p data-testid="recipe-category">{food.strCategory}</p>
+            </div>
+            <div className="container-btn-share-and-favorite">
+              <ButtonShareAndFavorite pathname={ pathname } food={ food } />
+            </div>
           </div>
-          <div>
+          <div className="boxRecipies">
             <h2>Ingredients</h2>
             <ul>
               { ingredientsList.length > 0
@@ -107,13 +116,19 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
                   data-testid={ `${index}-ingredient-name-and-measure` }
                   key={ item[0] }
                 >
-                  { `${item[1]} - ${item[2]} ` }
+                  { `${item[1]} ${item[2]} ${item[3]} ` }
                 </li>
               ))}
             </ul>
           </div>
-          <div>
-            <p data-testid="instructions">{food.strInstructions}</p>
+          <div className="boxInstructions">
+            <p
+              className="pInstuctions"
+              data-testid="instructions"
+            >
+              {food.strInstructions}
+
+            </p>
           </div>
           <div>
             <iframe
@@ -122,15 +137,16 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
               data-testid="video"
               frameBorder="0"
               allowFullScreen
+              className="youtube"
             >
               <p>Seu navegador não possui Suporte para este recurso...</p>
             </iframe>
           </div>
-          <div>
+          <div className="recomendation-box">
             <h2>Recommended</h2>
             <div className="recomendation-cards">
               { recommendedCards.map((item, index) => (
-                <div key={ index }>
+                <div className="cardRecomended" key={ index }>
                   <img
                     width="100px"
                     key={ index }

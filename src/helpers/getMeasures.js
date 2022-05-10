@@ -1,4 +1,4 @@
-const getMeasures = (meals) => {
+const getMeasures = (meals, ingredients) => {
   const arrFilter = Object.keys(meals).filter((item) => item.includes('strMeasure'));
   let measures = [];
   Object.entries(meals).forEach((item) => {
@@ -8,7 +8,14 @@ const getMeasures = (meals) => {
       measures = [...measures, item];
     }
   });
-  return measures;
+  ingredients.forEach((item, index) => {
+    if (measures[index]) {
+      ingredients[index] = [...item, '-', measures[index][1]];
+    } else {
+      ingredients[index] = [...item, '', ''];
+    }
+  });
+  return ingredients;
 };
 
 export default getMeasures;

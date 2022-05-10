@@ -1,3 +1,14 @@
 * {
   margin: 0;
 }
+
+.box-btmdoneRecipes {
+  display: flex;
+  margin-top: 80px;
+}
+
+.box-btmdoneRecipes button {
+  border-radius: 6px;
+  margin: 10px;
+  width: 90px;
+}

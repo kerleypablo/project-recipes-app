@@ -10,6 +10,12 @@ function Provider({ children }) {
   const [renderDrinks, setRenderDrinks] = useState([]);
   const [renderDrinkCategory, setRenderDrinkCategory] = useState([]);
   const [toggleValue, setToggleValue] = useState('');
+  const [Search, setSearch] = useState({
+    search: false,
+    RadioSelected: '',
+    searchValue: '',
+    inputSerach: '',
+  });
 
   useEffect(() => {
     const getCategory = async () => {
@@ -65,6 +71,8 @@ function Provider({ children }) {
     handleClickDCategories,
     toggleValue,
     setToggleValue,
+    Search,
+    setSearch,
   };
 
   return (

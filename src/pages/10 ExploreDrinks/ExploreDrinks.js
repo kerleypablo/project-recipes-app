@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header2';
 import { fetchRandomDrinks } from '../../services/fetchExploreRandom';
+import './ExploreDrinks.css';
 
 function ExploreDrinks() {
   const history = useHistory();
@@ -18,7 +19,7 @@ function ExploreDrinks() {
   }, []);
 
   return (
-    <div>
+    <div className="box-explorer">
       <Header PageTitle="Explore Drinks" />
       <section>
         <button

@@ -25,7 +25,7 @@ function Drinks() {
   return (
     <div>
       <HeaderDrinks PageTitle="Drinks" />
-      <div className="buttonCategory">
+      <div className="boxButtons">
         <BtnDrinksCategory />
       </div>
       <section className="foodsCategorySection">

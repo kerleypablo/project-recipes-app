@@ -11,6 +11,7 @@ function Foods() {
   const {
     renderFoods,
     setRenderFoods,
+    Search,
   } = useContext(Context);
 
   useEffect(() => {
@@ -25,19 +26,28 @@ function Foods() {
   return (
     <div>
       <Header PageTitle="Foods" />
-      <div className="buttonCategory">
+      <div className="boxButtons">
         <ButtonFoodsCategory />
       </div>
       <section className="foodsCategorySection">
-        {renderFoods.map(({ idMeal, strMealThumb, strMeal }, index) => (
-          <RecipesCard
-            index={ index }
-            key={ idMeal }
-            id={ idMeal }
-            thumneal={ strMealThumb }
-            name={ strMeal }
-          />
-        ))}
+        { Search.search
+          ? (
+            <>
+            </>
+          )
+          : (
+            <div>
+              {renderFoods.map(({ idMeal, strMealThumb, strMeal }, index) => (
+                <RecipesCard
+                  index={ index }
+                  key={ idMeal }
+                  id={ idMeal }
+                  thumneal={ strMealThumb }
+                  name={ strMeal }
+                />
+              ))}
+            </div>
+          )}
       </section>
       <Footer />
     </div>

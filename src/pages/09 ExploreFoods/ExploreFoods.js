@@ -18,7 +18,7 @@ function ExploreFoods() {
   }, []);
   console.log(idRandom);
   return (
-    <div>
+    <div className="box-explorer">
       <Header PageTitle="Explore Foods" />
       <section className="btnExplore">
         <button
