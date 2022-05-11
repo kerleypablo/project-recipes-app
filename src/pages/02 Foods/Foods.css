@@ -20,7 +20,7 @@
 
 .foodsCategorySection {
   flex-wrap: wrap;
-  height: 370px;
+  height: 63vh;
   overflow-y: scroll;
   width: 12px;
 }

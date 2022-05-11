@@ -12,7 +12,7 @@ function Profile() {
     <div>
       <Header PageTitle="Profile" />
       <section className={ Style.buttonCategory_Food }>
-        <p data-testid="profile-email">{ email.email }</p>
+        <p data-testid="profile-email">{ email != null ? email.email : '' }</p>
         <div>
 
           <button
