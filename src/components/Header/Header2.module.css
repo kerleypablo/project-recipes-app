@@ -1,0 +1,28 @@
+.header {
+  align-items: baseline;
+  background-color: rgb(252, 145, 58);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 60px;
+  left: 0;
+  padding: 10px 1px;
+  padding-left: 15px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.form_check_input {
+  height: 20px;
+  margin-top: 1px;
+  width: 20px;
+}
+
+.title {
+  color: white;
+  font-family: Lobster , sans-serif;
+  margin-left: 100px;
+}

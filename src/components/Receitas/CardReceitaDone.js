@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import ShareIcon from '../../images/shareIcon.svg';
-import './CardReceitaDone.css';
-import Style from './cardReceita.module.css';
+import Style from './CardReceitaDone.module.css';
 
 function CardReceitaDone({
   id, name, thumneal, index, date, nacionalidade,
@@ -25,12 +24,12 @@ function CardReceitaDone({
 
   return (
     <div
-      className={ Style.boxCardDone }
+      className={ Style.boxCard_Done }
       key={ id }
       data-testid={ `${index}-recipe-card` }
     >
       <Link to={ `/${pagina.toLowerCase()}/${id}` }>
-        <div className="boxCard-info">
+        <div className={ Style.boxCard_info }>
           <div>
             <img
               className="imgThumb"
@@ -41,22 +40,22 @@ function CardReceitaDone({
           </div>
           <div>
             <p
-              className="nacionality"
+              className={ Style.nacionality }
               data-testid={ `${index}-horizontal-top-text` }
             >
               {`${nacionalidade} - ${category} ${alcholic}`}
             </p>
             <p
-              className="NameCard"
+              className={ Style.NameCard }
               data-testid={ `${index}-horizontal-name` }
             >
               { name }
             </p>
             <p data-testid={ `${index}-horizontal-done-date` }>{`Done in: ${date}` }</p>
-            <div className="boxtags">
+            <div className={ Style.boxtags }>
               {tagsCard.filter((tag, index3) => index3 < NUM_RESULT)
                 .map((tag, index2) => (
-                  <div key={ index2 } className="tagsCard">
+                  <div key={ index2 } className={ Style.tagsCard }>
                     <p
                       data-testid={ `${index}-${tag}-horizontal-tag` }
                     >
@@ -73,7 +72,7 @@ function CardReceitaDone({
         <button
           type="button"
           onClick={ handleShare }
-          className="share"
+          className={ Style.share }
         >
           <img
             src={ ShareIcon }

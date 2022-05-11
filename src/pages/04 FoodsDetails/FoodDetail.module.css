@@ -1,0 +1,144 @@
+.foodsDetails {
+  width: 100%;
+}
+
+.container_main_foodDetails {
+  height: 100vh;
+  width: 100vw;
+}
+
+.foodimg_Details {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  height: 320px;
+  width: 360px;
+}
+
+.name_recipes_detail {
+  color: black;
+  font-size: 35px;
+  left: 16px;
+  position: absolute;
+  top: 270px;
+}
+
+.container_title {
+  display: flex;
+  justify-content: space-between;
+  margin: 1px;
+}
+
+.container_btn_share_and_favorite {
+  align-items: center;
+  display: flex;
+  height: 64px;
+  justify-content: center;
+}
+
+.container_btn_share_and_favorite button {
+  border: none;
+  height: 50%;
+  margin: 0 auto;
+}
+
+.recomendation_cards {
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row nowrap;
+  overflow: scroll;
+  width: 50%;
+}
+
+.recomendation_box {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.recomendation_box h2 {
+  color: rgba(237, 164, 18, 0.859);
+  font-family: Lobster , sans-serif;
+}
+
+.container_share_and_favorite_btn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.container_btn_start_recipe {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.start_recipe {
+  bottom: 0;
+  position: fixed;
+}
+
+.imgBox {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.imgBox h1 {
+  bottom: 360px;
+  color: white;
+  font-size: 25px;
+  margin-left: 130px;
+  margin-right: 10px;
+  position: absolute;
+}
+
+.imgBox p {
+  font-weight: 700;
+  margin-left: 140px;
+}
+
+.shareFav {
+  margin-top: -20px;
+  width: 60%;
+}
+
+.imgFood {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  box-shadow: 1px 3px 5px 1px gray;
+  height: 280px;
+  margin-bottom: 15px;
+  margin-left: 130px;
+  width: 80%;
+}
+
+.boxRecipies {
+  background-color: rgba(128, 128, 128, 0.109);
+  border: 2px solid rgba(237, 164, 18, 0.859);
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding-left: 80px;
+  padding-top: 20px;
+}
+
+.boxRecipies h2 {
+  color: rgba(237, 164, 18, 0.859);
+  font-family: Lobster , sans-serif;
+}
+
+.pInstuctions {
+  margin: 10px 30px;
+}
+
+.youtube {
+  height: 250px;
+  margin: 20px;
+  width: 90%;
+}
+
+.boxInstructions {
+  border-bottom: 8px solid rgba(237, 164, 18, 0.859);
+  border-radius: 20px;
+  border-top: 8px solid rgba(237, 164, 18, 0.859);
+  margin-bottom: 15px;
+}

@@ -24,11 +24,6 @@
   padding-right: 20px;
 }
 
-.linkselected {
+.link:hover {
   background-color: rgb(248, 197, 155);
-  height: 50px;
-  margin: auto;
-  margin-left: 1px;
-  padding-top: 10px;
-  width: 33%;
 }

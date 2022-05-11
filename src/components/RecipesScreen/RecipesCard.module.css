@@ -1,0 +1,27 @@
+.card {
+  border-radius: 5px;
+  margin: 10px;
+  margin-bottom: 5px;
+  margin-left: 1px;
+  padding-top: 10px;
+  transition: 1s;
+  width: 360px;
+}
+
+.card img {
+  border-radius: 5px;
+  box-shadow: 2px 2px 5px gray;
+  height: 230px;
+  margin-top: -45px;
+  width: 98%;
+}
+
+.card p {
+  background-color: rgba(255, 255, 255, 0.666);
+  color: black;
+  display: block;
+  font-size: 22px;
+  font-weight: 800;
+  position: relative;
+  top: 180px;
+}

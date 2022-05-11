@@ -9,6 +9,7 @@ import verifyInProgressRecipes from '../../helpers/verifyInProgressRecipes';
 import BtnStateRecipe from '../../components/BtnStateRecipe/BtnStateRecipe';
 import getMeasures from '../../helpers/getMeasures';
 import verifyDoneRecipes from '../../helpers/verifyDoneRecipes';
+import Style from './FoodDetail.module.css';
 
 function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   const [food, setFood] = useState({
@@ -81,7 +82,7 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
   };
 
   return (
-    <div className="container-main-foodDetails">
+    <div className={ Style.container_main_foodDetails }>
       { food !== '' ? (
         <div>
           <img
@@ -90,24 +91,24 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
             width="100%"
             height="400px"
             data-testid="recipe-photo"
-            className="foodimg-Details"
+            className={ Style.foodimg_Details }
           />
-          <div className="container-title">
+          <div className={ Style.container_title }>
             <div>
               <h1
                 data-testid="recipe-title"
-                className="name-recipes-detail"
+                className={ Style.name_recipes_detail }
               >
                 {food.strMeal}
 
               </h1>
               <p data-testid="recipe-category">{food.strCategory}</p>
             </div>
-            <div className="container-btn-share-and-favorite">
+            <div className={ Style.container_btn_share_and_favorite }>
               <ButtonShareAndFavorite pathname={ pathname } food={ food } />
             </div>
           </div>
-          <div className="boxRecipies">
+          <div className={ Style.boxRecipies }>
             <h2>Ingredients</h2>
             <ul>
               { ingredientsList.length > 0
@@ -121,10 +122,10 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
               ))}
             </ul>
           </div>
-          <div className="boxInstructions">
+          <div className={ Style.boxInstructions }>
             <h2>Instructions</h2>
             <p
-              className="pInstuctions"
+              className={ Style.pInstuctions }
               data-testid="instructions"
             >
               {food.strInstructions}
@@ -137,16 +138,16 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
               data-testid="video"
               frameBorder="0"
               allowFullScreen
-              className="youtube"
+              className={ Style.youtube }
             >
               <p>Seu navegador não possui Suporte para este recurso...</p>
             </iframe>
           </div>
-          <div className="recomendation-box">
+          <div className={ Style.recomendation_box }>
             <h2>Recommended</h2>
-            <div className="recomendation-cards">
+            <div className={ Style.recomendation_cards }>
               { recommendedCards.map((item, index) => (
-                <div className="cardRecomended" key={ index }>
+                <div className={ Style.cardRecomended } key={ index }>
                   <img
                     width="100px"
                     key={ index }
@@ -159,7 +160,7 @@ function FoodsDetails({ match: { params: { id } }, location: { pathname } }) {
               ))}
             </div>
           </div>
-          <div className="container-btn-start-recipe">
+          <div className={ Style.container_btn_start_recipe }>
             <BtnStateRecipe startRecipe={ startRecipe } stateRecipe={ stateRecipe } />
           </div>
         </div>

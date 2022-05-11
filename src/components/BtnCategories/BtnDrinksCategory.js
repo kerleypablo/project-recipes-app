@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import Context from '../../context/Context';
 import './BtnCategories.css';
+import Style from './BtnCategories.module.css';
 
 function ButtonDrinksCategory() {
   const {
@@ -10,7 +11,7 @@ function ButtonDrinksCategory() {
   } = useContext(Context);
 
   return (
-    <section className="buttonCategory_Food">
+    <section className={ Style.buttonCategory_Food }>
       { renderDrinkCategory.map(({ strCategory }, index) => (
         <button
           data-testid={ `${strCategory}-category-filter` }

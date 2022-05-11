@@ -4,11 +4,18 @@
 
 .box-btmdoneRecipes {
   display: flex;
-  margin-top: 80px;
+  justify-content: center;
 }
 
 .box-btmdoneRecipes button {
+  border: none;
   border-radius: 6px;
   margin: 10px;
   width: 90px;
 }
+
+.box-btmdoneRecipes button:hover {
+  background-color: rgb(92, 240, 92);
+  border: 2px solid gray;
+}
+

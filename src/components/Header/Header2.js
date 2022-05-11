@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProfileIcon from '../../images/profileIcon.svg';
-import Style from './Header.module.css';
+import Style from './Header2.module.css';
 
 function Header2({ PageTitle }) {
   return (

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import ShareIcon from '../../images/shareIcon.svg';
 import './CardReceitaDone.css';
 import BtnFavorite from '../BtnFavorite/BtnFavorite';
-import Style from './cardReceita.module.css';
+import Style from './CardReceitaDone.module.css';
 
 function CardFavotiteRecipies({
   id, name, thumneal, index, nacionalidade,
