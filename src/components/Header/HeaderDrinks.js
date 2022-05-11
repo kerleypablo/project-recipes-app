@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProfileIcon from '../../images/profileIcon.svg';
 import SearchIcon from '../../images/searchIcon.svg';
-import './Header.css';
+import Style from './Header.module.css';
 import HeaderApiDrinks from '../../redux/Services/HeaderApiDrinks';
 import CardReceita from '../Receitas/CardReceita';
+import Context from '../../context/Context';
 
 function HeaderDrinks({ PageTitle }) {
-  const [Search, setSearch] = useState({
-    search: false,
-    RadioSelected: '',
-    searchValue: '',
-    inputSerach: '',
-  });
+  const { Search, setSearch } = useContext(Context);
   const [Data, setData] = useState([]);
 
   const handleButton = async () => {
@@ -44,7 +40,7 @@ function HeaderDrinks({ PageTitle }) {
   function resulOfSearchDrinks() {
     if (Data !== null && Data.length > 1) {
       return (
-        <div className="boxRecipe">
+        <div className={ Style.boxRecipe }>
           {Data
             .map((receita, index) => (
               <CardReceita
@@ -73,16 +69,16 @@ function HeaderDrinks({ PageTitle }) {
   };
 
   return (
-    <header>
+    <header className={ Style.header }>
       <Link to="/profile" data-testid="profile-top-btn" src={ ProfileIcon }>
         <img
           src={ ProfileIcon }
           alt="profile"
         />
       </Link>
-      <h3 data-testid="page-title" className="title1">{ PageTitle }</h3>
+      <h3 data-testid="page-title" className={ Style.title1 }>{ PageTitle }</h3>
       <button
-        className="searchButton"
+        className={ Style.searchButton }
         type="button"
         onClick={ () => (
           Search.search
@@ -98,8 +94,8 @@ function HeaderDrinks({ PageTitle }) {
       </button>
       { Search.search
         ? (
-          <div className="boxSearch">
-            <form className="formHeader">
+          <div className={ Style.boxSearch }>
+            <form className={ Style.formHeader }>
               <input
                 className="searchInput"
                 type="text"
@@ -107,10 +103,10 @@ function HeaderDrinks({ PageTitle }) {
                 onChange={ ChangeOption }
                 name="inputSerach"
               />
-              <div className="form-check">
-                <label className="form-check-label" htmlFor="flexRadioDefault1">
+              <div className={ Style.form_check }>
+                <label className={ Style.form_check_label } htmlFor="flexRadioDefault1">
                   <input
-                    className="form-check-input"
+                    className={ Style.form_check_input }
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault1"
@@ -120,9 +116,9 @@ function HeaderDrinks({ PageTitle }) {
                   />
                   Ingredient
                 </label>
-                <label className="form-check-label" htmlFor="flexRadioDefault2">
+                <label className={ Style.form_check_label } htmlFor="flexRadioDefault2">
                   <input
-                    className="form-check-input"
+                    className={ Style.form_check_input }
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault2"
@@ -132,9 +128,9 @@ function HeaderDrinks({ PageTitle }) {
                   />
                   Name
                 </label>
-                <label className="form-check-label" htmlFor="flexRadioDefault3">
+                <label className={ Style.form_check_label } htmlFor="flexRadioDefault3">
                   <input
-                    className="form-check-input"
+                    className={ Style.form_check_input }
                     type="radio"
                     name="flexRadioDefault"
                     data-testid="first-letter-search-radio"
@@ -145,7 +141,7 @@ function HeaderDrinks({ PageTitle }) {
                 </label>
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className={ Style.btn_primary }
                   data-testid="exec-search-btn"
                   onClick={ handleButton }
                 >

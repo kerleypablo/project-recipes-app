@@ -7,6 +7,7 @@ import './Header.css';
 import HeaderApiFood from '../../redux/Services/HeaderApiFood';
 import CardReceita from '../Receitas/CardReceita';
 import Context from '../../context/Context';
+import Style from './Header.module.css';
 
 function Header({ PageTitle }) {
   const { Search, setSearch } = useContext(Context);
@@ -55,7 +56,7 @@ function Header({ PageTitle }) {
   function resulOfSearchFood() {
     if (Data !== null && Data.length > 1) {
       return (
-        <div className="boxRecipe">
+        <div className={ Style.boxRecipe }>
           {Data
             .map((receita, index) => (
               <CardReceita
@@ -75,16 +76,16 @@ function Header({ PageTitle }) {
   }
 
   return (
-    <header>
+    <header className={ Style.header }>
       <Link to="/profile" data-testid="profile-top-btn" src={ ProfileIcon }>
         <img
           src={ ProfileIcon }
           alt="profile"
         />
       </Link>
-      <h3 data-testid="page-title" className="title1">{ PageTitle }</h3>
+      <h3 data-testid="page-title" className={ Style.title1 }>{ PageTitle }</h3>
       <button
-        className="searchButton"
+        className={ Style.searchButton }
         type="button"
         onClick={ () => (
           Search.search
@@ -100,8 +101,8 @@ function Header({ PageTitle }) {
       </button>
       { Search.search
         ? (
-          <div className="boxSearch">
-            <form className="formHeader">
+          <div className={ Style.boxSearch }>
+            <form className={ Style.formHeader }>
               <input
                 className="searchInput"
                 type="text"
@@ -110,10 +111,10 @@ function Header({ PageTitle }) {
                 name="inputSerach"
                 value={ Search.inputSerach }
               />
-              <div className="form-check">
-                <label className="form-check-label" htmlFor="flexRadioDefault1">
+              <div className={ Style.form_check }>
+                <label className={ Style.form_check_label } htmlFor="flexRadioDefault1">
                   <input
-                    className="form-check-input"
+                    className={ Style.form_check_input }
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault1"
@@ -123,9 +124,9 @@ function Header({ PageTitle }) {
                   />
                   Ingredient
                 </label>
-                <label className="form-check-label" htmlFor="flexRadioDefault2">
+                <label className={ Style.form_check_label } htmlFor="flexRadioDefault2">
                   <input
-                    className="form-check-input"
+                    className={ Style.form_check_input }
                     type="radio"
                     name="flexRadioDefault"
                     id="flexRadioDefault2"
@@ -135,9 +136,9 @@ function Header({ PageTitle }) {
                   />
                   Name
                 </label>
-                <label className="form-check-label" htmlFor="flexRadioDefault3">
+                <label className={ Style.form_check_label } htmlFor="flexRadioDefault3">
                   <input
-                    className="form-check-input"
+                    className={ Style.form_check_input }
                     type="radio"
                     name="flexRadioDefault"
                     data-testid="first-letter-search-radio"
@@ -148,7 +149,7 @@ function Header({ PageTitle }) {
                 </label>
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className={ Style.btn_primary }
                   data-testid="exec-search-btn"
                   onClick={ handleButton }
                 >

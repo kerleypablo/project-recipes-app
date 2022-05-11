@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ProfileIcon from '../../images/profileIcon.svg';
-import './Header.css';
+import Style from './Header.module.css';
 
 function Header2({ PageTitle }) {
   return (
-    <header>
+    <header className={ Style.header }>
       <Link to="/profile">
         <img
           src={ ProfileIcon }
@@ -14,7 +14,7 @@ function Header2({ PageTitle }) {
           data-testid="profile-top-btn"
         />
       </Link>
-      <h3 className="title" data-testid="page-title">{ PageTitle }</h3>
+      <h3 className={ Style.title } data-testid="page-title">{ PageTitle }</h3>
     </header>
   );
 }

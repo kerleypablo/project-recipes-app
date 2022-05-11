@@ -1,0 +1,72 @@
+* {
+  font-family: serif;
+}
+
+.conteiner__box {
+  align-items: center;
+  background-color: rgb(252, 145, 58);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+
+}
+
+.conteiner__box img {
+  height: 120px;
+  margin-bottom: 40px;
+}
+
+.Logo_box {
+  align-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.621);
+  border-radius: 6px;
+  box-shadow: 1px 1px 30px 1px  rgba(251, 251, 251, 0.499);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.conteiner__box p {
+  color: white;
+  font-family: Bree serif , sans-serif;
+}
+
+.conteiner__box h2 {
+  color: red;
+  font-family: Lobster , sans-serif;
+  margin-left: 100px;
+}
+
+.conteiner__box h1 {
+  color: green;
+  margin-bottom: -18px;
+  margin-top: -23px;
+}
+
+.form_login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  width: 340px;
+}
+
+.form_login input {
+  background-color: rgba(255, 255, 255, 0.911);
+  border-radius: 8px;
+  height: 38px;
+  padding: auto;
+  width: 100%;
+}
+
+.form_login button {
+  background-color: white;
+  border-radius: 30px;
+  height: 50px;
+  margin-top: 25px;
+}
+
+.form_login button:hover {
+  background-color: rgb(54, 207, 156);
+}

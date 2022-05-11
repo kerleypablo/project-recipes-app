@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import './CardReceita.css';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import ShareIcon from '../../images/shareIcon.svg';
 import './CardReceitaDone.css';
+import Style from './cardReceita.module.css';
 
 function CardReceitaDone({
   id, name, thumneal, index, date, nacionalidade,
@@ -24,7 +24,11 @@ function CardReceitaDone({
   }
 
   return (
-    <div className="boxCard-Done" key={ id } data-testid={ `${index}-recipe-card` }>
+    <div
+      className={ Style.boxCardDone }
+      key={ id }
+      data-testid={ `${index}-recipe-card` }
+    >
       <Link to={ `/${pagina.toLowerCase()}/${id}` }>
         <div className="boxCard-info">
           <div>

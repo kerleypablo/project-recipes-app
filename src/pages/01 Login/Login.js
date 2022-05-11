@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as EmailValidator from 'email-validator';
-import './Login.css';
+import Style from './Login.module.css';
 
 const SIX = 6;
 
@@ -38,8 +38,14 @@ function Login() {
   };
 
   return (
-    <div>
-      <form>
+    <div className={ Style.conteiner__box }>
+      <div className={ Style.Logo_box }>
+        <img src="https://cdn-icons-png.flaticon.com/512/287/287000.png" alt="icone" />
+        <h1>TRYBE</h1>
+        <h2>Foods</h2>
+        <p>APP de Receitas</p>
+      </div>
+      <form className={ Style.form_login }>
         <label htmlFor="email-input">
           <input
             id="email-input"

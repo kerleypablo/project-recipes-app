@@ -1,0 +1,89 @@
+.header {
+  align-items: baseline;
+  background-color: rgb(252, 145, 58);
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 60px;
+  justify-content: space-between;
+  left: 0;
+  padding: 10px 1px;
+  padding-left: 15px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.title1 {
+  color: white;
+  font-family: Lobster , sans-serif;
+  text-align: center;
+  width: 250px;
+}
+
+.formHeader {
+  background-color: rgb(251, 242, 227);
+  border-radius: 5px;
+  box-shadow: 1px 1px 8px 1px rgba(128, 128, 128, 0.411);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 11px;
+  padding: 20px 10px 10px;
+  width: 96%;
+}
+
+.searchButton {
+  background-color: rgba(248, 247, 247, 0);
+  border: none;
+  height: 1px;
+  margin: 0;
+}
+
+.searchInput {
+  border-radius: 10px;
+  height: 35px;
+  width: 320px;
+}
+
+.form_check_input {
+  height: 20px;
+  margin-top: 1px;
+  width: 20px;
+}
+
+.title {
+  color: white;
+  font-family: Lobster , sans-serif;
+  width: 20px;
+}
+
+.form_check {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form_check label {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 100px;
+}
+
+.btn_primary {
+  background-color: white;
+  border-radius: 8px;
+  height: 40px;
+}
+
+.boxRecipe {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  height: 51.3vh;
+  justify-content: center;
+  margin-left: -15px;
+  overflow-y: scroll;
+  z-index: 1;
+}

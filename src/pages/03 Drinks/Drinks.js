@@ -11,6 +11,7 @@ function Drinks() {
   const {
     renderDrinks,
     setRenderDrinks,
+    Search,
   } = useContext(Context);
 
   useEffect(() => {
@@ -29,15 +30,24 @@ function Drinks() {
         <BtnDrinksCategory />
       </div>
       <section className="foodsCategorySection">
-        {renderDrinks.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
-          <RecipesCard
-            index={ index }
-            key={ idDrink }
-            id={ idDrink }
-            thumneal={ strDrinkThumb }
-            name={ strDrink }
-          />
-        ))}
+        { Search.search
+          ? (
+            <>
+            </>
+          )
+          : (
+            <div className="container-recipes-card">
+              {renderDrinks.map(({ idDrink, strDrinkThumb, strDrink }, index) => (
+                <RecipesCard
+                  index={ index }
+                  key={ idDrink }
+                  id={ idDrink }
+                  thumneal={ strDrinkThumb }
+                  name={ strDrink }
+                />
+              ))}
+            </div>
+          )}
       </section>
       <Footer />
     </div>

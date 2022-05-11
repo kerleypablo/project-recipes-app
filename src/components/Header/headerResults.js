@@ -1,12 +1,13 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import CardReceita from '../Receitas/CardReceita';
+import Style from './Header.module.css';
 
 export function resulOfSearchFood(data) {
   console.log(data);
   if (data !== null && data.length > 1) {
     return (
-      <div className="boxRecipe">
+      <div className={ Style.boxRecipe }>
         {data.map((receita) => (
           <CardReceita
             key={ receita.idMeal }
@@ -29,7 +30,7 @@ export function resulOfSearchFood(data) {
 export function resulOfSearchDrinks(data) {
   if (data !== null && data.length > 1) {
     return (
-      <div className="boxRecipe">
+      <div className={ Style.boxRecipe }>
         {data.map((receita) => (
           <CardReceita
             key={ receita.idDrink }

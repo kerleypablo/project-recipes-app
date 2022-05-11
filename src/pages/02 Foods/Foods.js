@@ -6,6 +6,7 @@ import Footer from '../../components/Footer/Footer';
 import ButtonFoodsCategory from '../../components/BtnCategories/BtnFoodsCategory';
 import { fetchFoods } from '../../services/fetchRecipesScreen';
 import './Foods.css';
+import Style from './FooterSelected.module.css';
 
 function Foods() {
   const {
