@@ -23,7 +23,7 @@ export function resulOfSearchFood(data) {
     return <Redirect to={ paginadirect } />;
   } if (data === null) {
     // eslint-disable-next-line no-alert
-    alert('Sorry, we haven\'t found any recipes for these filters.');
+    <p>Sorry, we havent found any recipes for these filters.</p>;
   }
 }
 

@@ -1,6 +1,6 @@
 .footer {
   background-color: rgb(252, 145, 58);
-  bottom: 0;
+  bottom: 20px;
   display: flex;
   flex-wrap: wrap;
   height: 50px;
