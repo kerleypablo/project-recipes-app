@@ -19,7 +19,6 @@
 .foodsCategorySection {
   display: flex;
   flex-direction: row;
-  width: 69vh;
 }
 
 .buttonCategory {

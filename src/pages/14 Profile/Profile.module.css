@@ -7,8 +7,10 @@
 }
 
 .buttonCategory_Food {
+  align-items: center;
   display: flex;
-  flex-wrap: wrap;
+  flex-flow: wrap;
+  flex-direction: column;
   font-size: 13px;
   justify-content: center;
   margin: 10px;

@@ -14,18 +14,22 @@
 .boxButtons {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 30 px;
-  width: 360px;
+  justify-content: center;
+
+  width: 100vh;
 }
 
 .foodsCategorySection {
   flex-wrap: wrap;
-  height: 63vh;
+  height: 27%;
+  justify-content: center;
   overflow-y: scroll;
-  width: 12px;
+  text-align: center;
+  width: 100vh;
 }
 
 .container-recipes-card {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: wrap;
+  justify-content: center;
 }

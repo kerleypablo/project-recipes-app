@@ -1,14 +1,13 @@
 .header {
-  align-items: baseline;
+  align-items: center;
   background-color: rgb(252, 145, 58);
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   display: flex;
   flex-wrap: wrap;
   height: 60px;
-  justify-content: space-between;
+  justify-content: center;
   left: 0;
-  padding: 10px 1px;
   padding-left: 15px;
   position: fixed;
   top: 0;
@@ -19,8 +18,9 @@
 .title1 {
   color: white;
   font-family: Lobster , sans-serif;
+  font-size: 50px;
   text-align: center;
-  width: 250px;
+  width: 43vh;
 }
 
 .formHeader {
@@ -38,8 +38,7 @@
 .searchButton {
   background-color: rgba(248, 247, 247, 0);
   border: none;
-  height: 1px;
-  margin: 0;
+
 }
 
 .searchInput {

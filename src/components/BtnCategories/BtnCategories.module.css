@@ -3,13 +3,13 @@
 }
 
 .buttonSelected {
-  background-color: #28a745;
+  background-color: #a79428;
 }
 
 .buttonCategory_Food {
   display: flex;
   flex-wrap: wrap;
-  font-size: 13px;
+  font-size: 18px;
   justify-content: center;
   margin: 10px;
   margin-bottom: 10px;
@@ -19,8 +19,8 @@
 .buttonCategory_Food button {
   border: none;
   border-radius: 6px;
-  height: 25px;
+  height: 45px;
   margin-left: 10px;
   margin-top: 10px;
-  width: 100px;
+  width: 130px;
 }
