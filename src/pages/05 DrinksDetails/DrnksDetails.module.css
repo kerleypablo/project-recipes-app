@@ -11,7 +11,7 @@
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   height: 320px;
-  width: 360px;
+  width: 100%;
 }
 
 .name_recipes_detail {

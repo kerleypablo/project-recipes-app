@@ -11,9 +11,9 @@
   flex-wrap: wrap;
   font-size: 18px;
   justify-content: center;
-  margin: 10px;
   margin-bottom: 10px;
   margin-top: 70px;
+  width: 450px;
 }
 
 .buttonCategory_Food button {

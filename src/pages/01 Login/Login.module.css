@@ -18,7 +18,6 @@
 
 .Logo_box {
   align-items: center;
-  animation: anim-stars 20s linear infinite;
   border: 2px solid rgba(255, 255, 255, 0.621);
   border-radius: 6px;
   box-shadow: 1px 1px 30px 1px  rgba(251, 251, 251, 0.499);
@@ -26,16 +25,6 @@
   flex-direction: column;
   padding: 20px;
   transition: 3s;
-}
-
-.Logo_box::after {
-  box-shadow: 50px 30px white, 100px 80px white,
-  80px 120px white,
-  300px 20px white,
-  250px 130px white,
-  200px 50px white,
-  150px 100px white,
-  320px 100px white
 }
 
 .conteiner__box p {

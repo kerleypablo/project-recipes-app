@@ -28,3 +28,6 @@ yarn-error.log*
 cypress/screenshots/
 cypress/videos/
 cypress/reports
+trybe.yml
+.github/*
+.trybe/*

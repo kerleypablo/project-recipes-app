@@ -14,9 +14,6 @@
 .boxButtons {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-
-  width: 100vh;
 }
 
 .foodsCategorySection {
@@ -31,5 +28,4 @@
 .container-recipes-card {
   display: flex;
   flex-flow: wrap;
-  justify-content: center;
 }
